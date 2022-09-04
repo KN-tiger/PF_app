@@ -22,8 +22,16 @@
 
 
 ## 設計書
-ER図
-![ER図](https://user-images.githubusercontent.com/108563821/188302707-52358c71-5f62-4d17-a682-205fd2768d23.png)
+![発注くんER図 drawio](https://user-images.githubusercontent.com/108563821/188304384-e41ad26c-7c1f-4b55-8994-f2bc1df5d8af.png)
+
+**gem**
+* enum_help
+* kaminari
+* devise
+
+**others**
+* Bootstrap
+* Active Storage
 
 ## 開発環境
 - OS：Linux(CentOS)

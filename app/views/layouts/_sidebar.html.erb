@@ -1,0 +1,24 @@
+<table class="table border">
+  <thead class="table-dark">
+    <tr>
+      <th>
+        ジャンル検索
+      <th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>
+        <ul class="list-group list-group-flush">
+          <% genres.each do |f| %>
+            <% if f.items.count != 0 %>
+            <li class="list-group-item">
+              <%= link_to f.name, genre_path(f) %>
+            </li>
+            <% end %>
+          <% end %>
+        </ul>
+      <th>
+    </tr>
+  </tbody>
+</table>

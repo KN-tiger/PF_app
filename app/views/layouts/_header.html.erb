@@ -1,0 +1,66 @@
+<header class="border-bottom">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container">
+      <% if admin_signed_in? %>
+        <%= link_to image_tag("logoM.png", class:"navbar-brand"), "/admin" %>
+      <% else %>
+        <%= link_to image_tag("logoM.png", class:"navbar-brand"), "/" %>
+      <% end %>
+      <% if user_signed_in? %>
+        <span class="navbar-text">ログイン中：<%= current_user.last_name %>さん</span>
+      <% elsif admin_signed_in? %>
+        <span class="navbar-text">管理者：<%= current_admin.last_name %>さん</span>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <li>
+              <%= link_to "マイページ", my_page_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "商品一覧", items_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "カート", carts_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+            </li>
+          <% elsif admin_signed_in? %>
+            <li>
+              <%= link_to "商品一覧", admin_items_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "社員一覧", admin_users_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "注文履歴一覧", admin_orders_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "ジャンル一覧", admin_genres_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "タグ一覧", admin_genres_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link' %>
+            </li>
+          <% else %>
+            <li>
+              <%= link_to "About", about_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "商品一覧", items_path, class: 'nav-link' %>
+            </li>
+            <li>
+              <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

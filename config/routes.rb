@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   scope module: :public do
     root to: "homes#top"
     get '/about', to: 'homes#about', as: 'about'
@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
     resources :rooms, only: [:create,:show]
   end
-  
+
   devise_for :users,skip: [:passwords], controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
@@ -28,18 +28,18 @@ Rails.application.routes.draw do
     resources :items, except: [:destroy]
     resources :genres, except: [:new,:show,:destroy]
     resources :tags, except: [:new,:show,:destroy]
-    get 'customers/:id/order_history', to: 'customers#order_history', as: 'customers_order_history'
-    resources :customers, except: [:new,:create,:destroy]
-    resources :orders, only: [:show,:update] do
+    get 'users/:id/order_history', to: 'users#order_history', as: 'users_order_history'
+    resources :users, except: [:new,:create,:destroy]
+    resources :orders, only: [:index,:show,:update] do
       resources :order_items, only: [:update]
     end
     resources :messages, only: [:create]
     resources :rooms, only: [:create,:show]
   end
-  
+
   devise_for :admin,skip: [:passwords], controllers: {
     registrations: "admin/registrations",
     sessions: "admin/sessions"
   }
-  
+
 end

@@ -1,0 +1,21 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-10">
+
+      <div class="row-md-10 pb-3">
+        <h2>ジャンル編集</h2>
+      </div>
+
+      <div class="row-md-10 pb-3">
+        <%= render 'layouts/errors', obj: @genre %>
+        <%= form_with model: @genre, url: admin_genre_path, local: true, method: :patch do |form| %>
+          <div class="d-flex mb-3">
+            <%= form.label :name, "ジャンル名", class: "mr-3" %>
+            <%= form.text_field :name, class: "form-control w-25 mr-3" %>
+            <%= form.submit "変更を保存", class: "btn btn-success w-25 mr-3" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

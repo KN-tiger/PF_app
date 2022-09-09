@@ -1,0 +1,50 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-12 mx-auto">
+
+      <div class="row-md-12 pb-3">
+        <h2>注文履歴一覧</h2>
+      </div>
+
+      <div class="row-md-12 pb-3">
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th>注文日</th>
+              <th>配送先</th>
+              <th>注文商品</th>
+              <th>支払金額</th>
+              <th>ステータス</th>
+              <th>注文詳細</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+              <td>
+                〒<%= order.postal_code.insert(3, "-") %><br>
+                <%= order.address %><br>
+                <%= order.name %>
+              </td>
+              <td>
+                <% order.items.each do |item| %>
+                <%= item.name %><br>
+                <% end %>
+              </td>
+              <td><%= order.total_payment.to_s(:delimited) %>円</td>
+              <td><%= order.order_status_i18n %></td>
+              <td><%= link_to "表示する", order_path(order), class: "btn btn-sm btn-primary" %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row-md-12 pb-3">
+        <p><%= paginate @orders %></p>
+      </div>
+    </div>
+  </div>
+</div>

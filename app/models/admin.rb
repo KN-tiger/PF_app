@@ -4,10 +4,22 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :authentication_keys => [:login_id]
-         
+
   validates :login_id, uniqueness: true, presence: true
-  validates :email, uniqueness: true
-  
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :last_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
+  validates :first_name_kana, presence: true, format: { with: /\A[ァ-ヶー－]+\z/ }
+  validates :telephone_number, presence: true, format: { with: /\A\d{10,11}\z/ }
+
+  def full_name
+    last_name + " " + first_name
+  end
+
+  def full_name_kana
+    last_name_kana + " " + first_name_kana
+  end
+
   def email_required?
     false
   end
@@ -15,4 +27,5 @@ class Admin < ApplicationRecord
   def email_changed?
     false
   end
+
 end

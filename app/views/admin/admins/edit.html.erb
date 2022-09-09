@@ -1,0 +1,66 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <h2><%= @admin.full_name %>さんの社員情報編集</h2>
+      <div class="row-md-10 pb-3">
+        <%= render 'layouts/errors', obj: @admin %>
+        <table class="table">
+          <tr>
+            <th>
+              会員ID
+            </th>
+            <th>
+              <%= @admin.login_id %>
+            </th>
+          </tr>
+          <%= form_with model: @admin, url: admin_admin_path(@admin.id), local: true, method: :patch do |form| %>
+          <tr>
+            <th>
+              氏名
+            </th>
+            <th class="d-flex">
+              <%= form.text_field :last_name, class: "form-control w-25 mr-3" %>
+              <%= form.text_field :first_name, class: "form-control w-25 mr-3" %>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              フリガナ
+            </th>
+            <th class="d-flex">
+              <%= form.text_field :last_name_kana, class: "form-control w-25 mr-3" %>
+              <%= form.text_field :first_name_kana, class: "form-control w-25 mr-3" %>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              電話番号
+            </th>
+            <th>
+              <%= form.text_field :telephone_number, class: "form-control w-25 mr-3" %>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              会員ステータス
+            </th>
+            <th>
+              <%= form.radio_button :is_deleted, :false, {:checked => true} %>有効
+              <%= form.radio_button :is_deleted, :true %>無効
+            </th>
+          </tr>
+          <tr>
+            <th>
+            </th>
+            <th>
+              <%= form.submit "変更を保存", class: "btn btn-success w-25" %>
+              <%= link_to "無効にする", admin_admins_deactivate_path, method: :patch, class: "btn btn-danger w-25" %>
+            </th>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

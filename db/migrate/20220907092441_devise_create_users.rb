@@ -35,12 +35,13 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :first_name, null: false
       t.string :last_name_kana, null: false
       t.string :first_name_kana, null: false
+      t.string :telephone_number, null: false
       t.string :login_id, null: false
       t.boolean :is_deleted, null: false, default: false
       t.timestamps null: false
     end
 
-    add_index :users, :email,                unique: true
+    add_index :users, :login_id,                unique: true
     add_index :users, :reset_password_token, unique: true
     # add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true

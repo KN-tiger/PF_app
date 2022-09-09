@@ -1,0 +1,60 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <h2><%= @admin.full_name %>さんの社員情報詳細</h2>
+      <div class="row-md-10 pb-3">
+        <table class="table">
+          <tr>
+            <th style="width: 30%">
+              会員ID
+            </th>
+            <th>
+              <%= @admin.login_id %>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              氏名
+            </th>
+            <th>
+              <%= @admin.full_name %>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              フリガナ
+            </th>
+            <th>
+              <%= @admin.full_name_kana %>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              電話番号
+            </th>
+            <th>
+              <%= @admin.telephone_number %>
+            </th>
+          </tr>
+          <tr>
+            <th>
+              会員ステータス
+            </th>
+            <th>
+              <% if @admin.is_deleted == false %>
+                有効
+              <% else %>
+                無効
+              <% end %>
+            </th>
+          </tr>
+          <tr>
+            <th colspan="2" class="text-center">
+              <%= link_to "編集する", edit_admin_admin_path(@admin.id), class: "btn btn-success", method: :get %>
+            </th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

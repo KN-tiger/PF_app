@@ -1,0 +1,55 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+
+      <div class="row-md-10 pb-3">
+        <h2>商品新規登録</h2>
+      </div>
+
+      <div class="row-md-10 pb-3">
+        <%= render 'layouts/errors', obj: @item_new %>
+        <%= form_with model: @item_new, url: admin_items_path, local: true do |f| %>
+          <div class="field d-flex mb-3">
+            <%= f.label :image, "商品画像", class: "w-25" %><br>
+            <%= f.file_field :image, accept: 'image/*', class: "form-control-file w-50" %>
+          </div>
+
+          <div class="field d-flex mb-3">
+            <%= f.label :name, "商品名", class: "w-25" %><br>
+            <%= f.text_field :name, class: "form-control w-50" %>
+          </div>
+
+          <div class="field d-flex mb-3">
+            <%= f.label :introduction, "商品説明", class: "w-25" %><br>
+            <%= f.text_area :introduction, class: "form-control w-50" %>
+          </div>
+
+          <div class="field d-flex mb-3">
+            <%= f.label :genre_id, "ジャンル", class: "w-25" %><br>
+            <%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "選択して下さい", class: "form-select w-50" %>
+          </div>
+
+          <div class="field d-flex mb-3">
+            <%= f.label :price_without_tax, "税抜価格", class: "w-25" %><br>
+            <%= f.number_field :price_without_tax, class: "w-50" %>円
+          </div>
+
+          <div class="field d-flex mb-3">
+            <p class="w-25">販売ステータス</p>
+            <div class="is_stopped">
+              <%= f.radio_button :is_stopped, false %>
+              <%= f.label :is_stopped, "販売中", value: false %>
+
+              <%= f.radio_button :is_stopped, true, class: "ml-3"%>
+              <%= f.label :is_stopped, "販売停止中", value: true %>
+            </div>
+          </div>
+
+          <div class="actions text-center">
+            <%= f.submit "新規登録", class: 'btn btn-success w-50' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

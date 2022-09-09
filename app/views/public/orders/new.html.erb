@@ -1,0 +1,73 @@
+<div class='container py-5'>
+  <div class='row'>
+    <div class='col-md-10 mx-auto'>
+      <div class="row-md-10 pb-3">
+        <h2>注文情報入力</h2>
+      </div>
+
+      <div class="row-md-10 pb-3">
+        <div class="form-row">
+          <%= form_with model: @order, url: orders_confirm_path, local: true, method: :post do |f| %>
+            <div class="form-group">
+              <%= f.label :payment_method, "支払方法", class: "font-weight-bold" %>
+              <div class="pl-3">
+                <%= f.radio_button :payment_method, Order.payment_methods.key(0) %>
+                <%= f.label :payment_method, Order.payment_methods_i18n[:credit_card] %>
+              </div>
+              <div class="pl-3">
+                <%= f.radio_button :payment_method, Order.payment_methods.key(1) %>
+                <%= f.label :payment_method, Order.payment_methods_i18n[:bank_transfer]%>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="font-weight-bold">お届け先</label>
+              <div class="pl-3">
+                <%= f.radio_button :address_number, 1, {:checked => true} %>
+                <%= f.label :address_number_1, "ご自身の住所" %>
+              </div>
+              <span class="pl-5">〒<%= @customer_address %></span><br>
+              <span class="pl-5"><%= @customer_name %></span>
+            </div>
+
+            <div class="form-group">
+              <div class="pl-3">
+                <%= f.radio_button :address_number, 2 %>
+                <%= f.label :address_number_2, "登録済住所から選択" %>
+              </div>
+              <div class="pl-5">
+                <%= f.select :destination_id, options_from_collection_for_select(@customer.destinations.all, :id, :address_display), class: "form-select" %>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="pl-3">
+                <%= f.radio_button :address_number, 3 %>
+                <%= f.label :address_number_3, "新しいお届け先" %>
+              </div>
+
+              <div class="pl-5">
+                <%= f.label :postal_code, "郵便番号(ハイフンなし)", class: "w-50" %>
+                <%= f.text_field :postal_code, class: "w-auto" %>
+              </div>
+
+              <div class="pl-5">
+                <%= f.label :address, "住所", class: "w-50" %>
+                <%= f.text_field :address, class: "w-auto" %>
+              </div>
+
+              <div class="pl-5">
+                <%= f.label :name, "宛名", class: "w-50" %>
+                <%= f.text_field :name, class: "w-auto" %>
+              </div>
+            </div>
+
+            <div class="text-center">
+              <%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

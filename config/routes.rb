@@ -12,8 +12,10 @@ Rails.application.routes.draw do
     resources :orders, except: [:edit,:update,:destroy]
     resources :genres, only: [:show]
     resources :tags, only: [:show]
+    resources :admins, only: [:index]
     resources :messages, only: [:create]
     resources :rooms, only: [:create,:show]
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
 
   devise_for :users,skip: [:passwords], controllers: {
@@ -29,12 +31,16 @@ Rails.application.routes.draw do
     resources :genres, except: [:new,:show,:destroy]
     resources :tags, except: [:new,:show,:destroy]
     get 'users/:id/order_history', to: 'users#order_history', as: 'users_order_history'
+    patch 'users/:id/deactivate', to: 'users#deactivate', as: 'users_deactivate'
     resources :users, except: [:new,:create,:destroy]
+    patch 'admins/:id/deactivate', to: 'admins#deactivate', as: 'admins_deactivate'
+    resources :admins, except: [:new,:create,:destroy]
     resources :orders, only: [:index,:show,:update] do
       resources :order_items, only: [:update]
     end
     resources :messages, only: [:create]
     resources :rooms, only: [:create,:show]
+    post 'admins/guest_sign_in', to: 'admins/sessions#guest_sign_in'
   end
 
   devise_for :admin,skip: [:passwords], controllers: {

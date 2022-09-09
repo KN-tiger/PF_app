@@ -1,0 +1,30 @@
+<div class="container py-5">
+  <div class="row pb-3">
+    <h2>ログイン</h2>
+  </div>
+
+  <div class="row pb-3">
+    <div class="col-md-10 mx-auto">
+
+      <%= form_with model: @user, url: user_session_path, local: true do |f| %>
+        <div class="field d-flex mb-3">
+            <%= f.label :login_id, "ログインID", class: "w-25"  %><br />
+            <%= f.text_field :login_id, autofocus: true, autocomplete: "login_id", class: "form-control w-50" %>
+        </div>
+
+        <div class="field d-flex mb-3">
+          <%= f.label :password, "パスワード", class: "w-25" %>
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control w-50" %>
+        </div>
+
+        <div class="actions text-center">
+          <%= f.submit "ログイン", class: 'btn btn-primary w-50' %>
+        </div>
+      <% end %>
+
+      <!--<div class="text-center">-->
+        <%#<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary w-50 mt-3", method: :post %>
+      <!--</div>-->
+    </div>
+  </div>
+</div>

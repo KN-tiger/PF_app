@@ -24,4 +24,21 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  def reject_inactive_user
+    @user = User.find_by(email: params[:user][:login_id])
+    if @user
+      if @user.valid_password?(params[:user][:password]) && @user.is_deleted
+        flash[:alert] = 'IDが無効になっています。'
+        redirect_to user_session_path
+      end
+    end
+  end
+
+  # def guest_sign_in
+  #   user = User.guest
+  #   sign_in user
+  #   redirect_to root_path, notice: 'ゲストユーザーでログインしました。'
+  # end
+
 end

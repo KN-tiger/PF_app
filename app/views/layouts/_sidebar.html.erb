@@ -10,11 +10,11 @@
     <tr>
       <th>
         <ul class="list-group list-group-flush">
-          <% genres.each do |f| %>
-            <% if f.items.count != 0 %>
+          <% genres.each do |genre| %>
+            <% if genre.items.count != 0 %>
               <li class="list-group-item">
-                <%= link_to f.name, genre_path(f) %>
-            </li>
+                <%= link_to genre.name, genre_path(genre) %>
+              </li>
             <% end %>
           <% end %>
         </ul>

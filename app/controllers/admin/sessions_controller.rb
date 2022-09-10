@@ -27,11 +27,11 @@ class Admin::SessionsController < Devise::SessionsController
 
   def reject_inactive_admin
     @admin = Admin.find_by(login_id: params[:admin][:login_id])
-    if @admin
-      if @admin.valid_password?(params[:admin][:password]) && @admin.is_deleted
-        flash[:alert] = 'IDが無効になっています。'
-        redirect_to new_admin_session_path
-      end
+    return if !@admin
+    if @admin.valid_password?(params[:admin][:password]) && @admin.is_deleted
+      flash[:alert] = 'IDが無効になっています。'
+      redirect_to new_admin_session_path
     end
   end
+
 end

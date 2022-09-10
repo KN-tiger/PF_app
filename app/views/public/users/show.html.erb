@@ -1,0 +1,37 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <h2 class="font-weight-bold">マイページ</h2>
+      <div class="row-md-10 mt-3 pb-3">
+        <h3>社員情報</h3>
+      </div>
+
+      <div class="row-md-10 pb-3 font-weight-bold">
+        <table class="table table-bordered">
+          <tr>
+            <td class="bg-light w-25">社員ID</td>
+            <td><%= @user.login_id %></td>
+          </tr>
+          <tr>
+            <td class="bg-light w-25">氏名</td>
+            <td><%= @user.full_name %></td>
+          </tr>
+          <tr>
+            <td class="bg-light w-25">カナ</td>
+            <td><%= @user.full_name_kana %></td>
+          </tr>
+            <td class="bg-light w-25">電話番号</td>
+            <td><%= @user.telephone_number %></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="row-md-10 pb-3">
+        <h3 class="w-25">注文履歴</h3>
+        <div class="text-center">
+          <%= link_to "過去の注文履歴を見る", orders_path, class: "btn btn-success w-50" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

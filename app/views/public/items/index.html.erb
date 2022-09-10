@@ -1,24 +1,28 @@
 <div class="container py-5">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-3">
       <%= render 'layouts/sidebar',genres: @genres %>
     </div>
-    <div class="col-md-9 offset-md-1">
-      <h2>商品一覧（全<%= @items.count %>件）</h2>
+    <div class="col-md-9">
+      <h2>商品一覧（全<%= @total_items.count %>件）</h2>
       <div class="row-md-9 pb-3">
         <div class="d-flex flex-wrap">
-          <% @items.each do |item| %>
-            <div class="w-25 p-1">
+        <% @items.each do |item| %>
+          <div class="card-group">
+            <div class="card shadow-sm">
               <%= link_to item_path(item) do %>
-                <%= image_tag item.get_image(160,120), class: "w-100" %>
-                <p><%= item.name %></p>
-                <p>￥<%= item.price_with_tax.to_s(:delimited) %></p>
-                <% unless item.is_stopped == false %>
-                  <p class="card-text font-weight-bold text-danger">Sold Out</p>
-                <% end %>
+                <%= image_tag item.image, class: "bd-placeholder-img card-img-top" %>
+                <div class="card-body">
+                  <h5 class="card-title"><%= item.name %></h5>
+                  <p class="card-text">￥<%= item.price_with_tax.to_s(:delimited) %></p>
+                  <% unless item.is_stopped == false %>
+                    <p class="card-text font-weight-bold text-danger">Sold Out</p>
+                  <% end %>
+                </div>
               <% end %>
             </div>
-          <% end %>
+          </div>
+        <% end %>
         </div>
       </div>
       <div class="row-md-9 pb-3">

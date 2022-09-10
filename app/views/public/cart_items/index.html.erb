@@ -1,0 +1,77 @@
+<div class='container py-5'>
+  <div class='row'>
+    <div class='col-md-10 mx-auto'>
+
+      <div class="row-md-10 pb-3">
+        <h2>ショッピングカート</h2>
+      </div>
+
+      <div class="row-md-10 pb-3">
+      <% if current_user.cart_items.present? %>
+        <div class="text-right mb-3">
+          <%= link_to "カートを空にする", cart_items_destroy_all_path, method: :delete, class: "btn btn-danger" %>
+        </div>
+
+        <table class='table table-bordered mb-3'>
+          <thead class="thead-light">
+            <tr>
+              <th colspan="2">商品名</th>
+              <th>単価（税込）</th>
+              <th>数量</th>
+              <th>小計</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr id="cart_item_<%= cart_item.id %>">
+              <td class="border-right-0"><%= image_tag cart_item.item.get_image(80,60) %></td>
+              <td class="border-left-0">
+                <%= link_to item_path(cart_item.item_id) do %>
+                  <%= cart_item.item.name %>
+                <% end %>
+              </td>
+              <td>￥<%= cart_item.item.price_with_tax.to_s(:delimited) %></td>
+              <td>
+                <%= form_with model: cart_item, url: cart_item_path(cart_item.id), local: true, method: :patch do |f| %>
+                  <%= f.hidden_field :item_id, :value => cart_item.item.id %>
+                  <%= f.select(:amount, *[1..cart_item.max_amount.to_i],{ selected: cart_item.amount.to_i }, :required => true, class: "form-select") %>
+                  <%= f.submit "変更", class: "btn btn-success" %>
+                <% end %>
+              </td>
+              <td>￥<%= cart_item.subtotal.to_s(:delimited) %></td>
+              <td><%= link_to "削除する", cart_item_path(cart_item.id), method: :delete, data: { confirm: "商品を削除しますか？" }, class: "btn btn-danger" %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+        <div class="d-flex justify-content-between">
+          <div class="w-25">
+          <%= link_to "買い物を続ける", items_path, method: :get, class: "btn btn-primary" %>
+          </div>
+
+          <table class='table table-bordered w-25'>
+            <tr>
+              <td class="bg-light">合計金額</td>
+              <td>￥<%= @total.to_s(:delimited) %></td>
+            </tr>
+          </table>
+        </div>
+
+         <div class="text-center">
+          <%= link_to "情報入力に進む", new_order_path, method: :get, class: "btn btn-success" %>
+        </div>
+      <% else %>
+        <div class="text-center">
+          <p>カートに商品はありません</p>
+          <%= link_to "買い物を続ける", items_path, method: :get, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

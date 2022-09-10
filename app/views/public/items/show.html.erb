@@ -5,7 +5,7 @@
     </div>
 
     <div class='col-md-8 offset-1'>
-      <%= render 'layouts/errors', obj: @cart %>
+      <%= render 'layouts/errors', obj: @cart_item %>
 
       <div class='d-flex flex-row'>
         <div class="w-50 p-1">
@@ -17,14 +17,10 @@
           <p><%= @item.introduction %></p>
           <p>￥<%= @item.price_with_tax.to_s(:delimited) %>(税込)</p>
 
-          <% if !customer_signed_in? %>
-            <p class="font-weight-bold text-danger">ご購入にはログインが必要です。</p>
-            <p>会員登録がお済みの方は<%= link_to "こちら", new_customer_session_path %></p>
-            <p>はじめてのご利用の方は<%= link_to "こちら", new_customer_registration_path %></p>
-          <% elsif @item.is_stopped == false %>
-            <%= form_with model: @cart, url: carts_path, method: :post do |f| %>
+          <% if @item.is_stopped == false %>
+            <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
               <%= f.hidden_field :item_id, :value => @item.id %>
-              <%= f.select(:amount, *[1..30],{ :include_blank => '個数選択' }, :required => true, class: "form-select mr-3") %>
+              <%= f.select(:amount, *[1..10],{ :include_blank => '個数選択' }, :required => true, class: "form-select mr-3") %>
               <%= f.submit "カートに入れる", class: "btn btn-success w-50" %>
             <% end %>
           <% else %>

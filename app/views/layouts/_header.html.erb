@@ -3,8 +3,10 @@
     <div class="container">
       <% if admin_signed_in? %>
         <%= link_to image_tag("logoM.png", class:"navbar-brand"), "/admin/orders" %>
-      <% else %>
+      <% elsif user_signed_in? %>
         <%= link_to image_tag("logoM.png", class:"navbar-brand"), "/items" %>
+      <% else %>
+        <%= link_to image_tag("logoM.png", class:"navbar-brand"), "/" %>
       <% end %>
       <% if user_signed_in? %>
         <div class="login_infomation">

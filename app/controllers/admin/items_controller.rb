@@ -2,7 +2,7 @@ class Admin::ItemsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @items = Item.all.page(params[:page]).per(10)
+    @items = Item.all.page(params[:page]).per(8)
   end
 
   def new
@@ -13,8 +13,10 @@ class Admin::ItemsController < ApplicationController
   def create
     @item_new = Item.new(item_params)
     if @item_new.save
-      redirect_to admin_item_path(@item_new), notice: "商品が登録されました。"
+      flash[:notice] = "商品を登録しました"
+      redirect_to admin_item_path(@item)
     else
+      flash[:alert] = "商品の登録に失敗しました"
       @genres = Genre.all
       render :new
     end
@@ -32,8 +34,10 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      redirect_to admin_item_path(@item), notice: "変更内容が保存されました。"
+      flash[:notice] = "商品登録情報を変更しました"
+      redirect_to admin_item_path(@item)
     else
+      flash[:alert] = "商品登録情報の変更に失敗しました"
       @genres = Genre.all
       render :edit
     end
@@ -42,8 +46,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:images, :genre_id, :name, :introduction, :price_without_tax, :is_stopped)
+    params.require(:item).permit(:genre_id, :name, :introduction, :price_without_tax, :is_stopped, :image)
   end
 
-  
 end

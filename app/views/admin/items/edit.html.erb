@@ -1,19 +1,24 @@
 <div class="container py-5">
   <div class="row">
     <div class="col-md-10 mx-auto">
-
-      <div class="row-md-10 pb-3">
-        <h2>商品編集</h2>
-      </div>
-
+      <h2>商品編集</h2>
       <div class="row-md-10 pb-3">
         <%= render 'layouts/errors', obj: @item %>
         <%= form_with model: @item, url: admin_item_path(@item), method: :patch, local: true do |f| %>
           <div class="field d-flex mb-3">
-            <%= f.label :image, "商品画像", class: "w-25" %><br>
-            <%= f.file_field :image, accept: 'image/*', class: "form-control-file w-50" %>
+            <div class="w-25">商品画像</div>
+            <% if @item.image.attached? %>
+              <%= image_tag @item.get_image(300, 240)%>
+            <% end %>
           </div>
-
+          <div class="field d-flex mb-3">
+            <div class="w-25"></div>
+            <div id="preview"></div>
+          </div>
+          <div class="field d-flex mb-3">
+            <%= f.label :image, "画像を変更する", class: "w-25" %><br>
+            <%= f.file_field :image, accept:'image/*', id:"item-image" %>
+          </div>
           <div class="field d-flex mb-3">
             <%= f.label :name, "商品名", class: "w-25" %><br>
             <%= f.text_field :name, class: "form-control w-50" %>
@@ -39,13 +44,12 @@
             <div class="is_stopped">
               <%= f.radio_button :is_stopped, false %>
               <%= f.label :is_stopped, "販売中", value: false %>
-
               <%= f.radio_button :is_stopped, true, class: "ml-3"%>
               <%= f.label :is_stopped, "販売停止中", value: true %>
             </div>
           </div>
 
-          <div class="actions text-center">
+          <div class="actions text-center mb-5">
             <%= f.submit "変更を保存", class: 'btn btn-success w-50' %>
           </div>
         <% end %>

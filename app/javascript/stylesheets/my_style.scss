@@ -15,7 +15,7 @@ button{
   font-size: 3em;
   color: #ffab66;
   }
-  
+
 .btn {
   border-radius: 40px;
 }
@@ -95,7 +95,7 @@ button{
   display: flex;
   justify-content: center;
   }
-  
+
 .page-link {
   border-radius: 50% !important;
 }
@@ -108,4 +108,27 @@ button{
 
 .pagination>.active>a {
   background: #5295cc !important;
+}
+
+textarea {
+	height: 300px !important;
+}
+
+.preview-size{
+  height: 240px;
+  width: 300px;
+  }
+
+.card-group {
+  width: 30%;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 25vh;
+  object-fit: cover;
+}
+
+.card {
+  margin: 2px;
 }

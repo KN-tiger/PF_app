@@ -4,7 +4,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :authentication_keys => [:login_id]
-  
+
+  has_many :cart_items, dependent: :destroy
+  has_many :orders
+
   validates :login_id, uniqueness: true, presence: true
   validates :last_name, presence: true
   validates :first_name, presence: true
@@ -27,7 +30,7 @@ class User < ApplicationRecord
   def full_name_kana
     last_name_kana + " " + first_name_kana
   end
-  
+
   def self.guest
     find_or_create_by!(login_id: 'guest@example') do |user|
       user.encrypted_password = SecureRandom.urlsafe_base64

@@ -12,7 +12,7 @@
           <thead class="thead-light">
             <tr>
               <th>
-                ログインID
+                社員ID
               </th>
               <th>
                 氏名
@@ -57,7 +57,9 @@
             <% end %>
           </tbody>
         </table>
-        <%= paginate @users %>
+        <div class="mb-3">
+          <%= paginate @users %>
+        </div>  
       </div>
     </div>
   </div>

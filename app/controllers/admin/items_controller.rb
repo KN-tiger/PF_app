@@ -34,11 +34,12 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     if @item.update(item_params)
-      flash[:notice] = "商品登録情報を変更しました"
+      flash[:notice] = "商品情報を変更しました"
       redirect_to admin_item_path(@item)
     else
-      flash[:alert] = "商品登録情報の変更に失敗しました"
+      @item_old_image = Item.find(params[:id])
       @genres = Genre.all
+      flash[:alert] = "商品情報の変更に失敗しました"
       render :edit
     end
   end

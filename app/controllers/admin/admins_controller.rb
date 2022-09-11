@@ -19,6 +19,7 @@ class Admin::AdminsController < ApplicationController
       redirect_to admin_admin_path(@admin.id)
       flash[:notice] = "編集した内容を保存しました。"
     else
+      flash[:alert] = "編集の保存に失敗しました。"
       render :edit
     end
   end

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'admin/index'
+  end
   scope module: :public do
     root to: "homes#top"
     get '/about', to: 'homes#about', as: 'about'
@@ -12,7 +15,7 @@ Rails.application.routes.draw do
     resources :orders, except: [:edit,:update,:destroy]
     resources :genres, only: [:show]
     resources :tags, only: [:show]
-    resources :admins, only: [:index]
+    resources :admins, only: [:index,:show]
     resources :messages, only: [:create]
     resources :rooms, only: [:create,:show]
     post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'

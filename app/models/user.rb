@@ -32,14 +32,7 @@ class User < ApplicationRecord
   end
 
   def self.guest
-    find_or_create_by!(login_id: 'guest@example') do |user|
-      user.encrypted_password = SecureRandom.urlsafe_base64
-      user.last_name = "ゲストさん"
-      user.first_name = "ようこそ"
-      user.last_name_kana = "ゲストサン"
-      user.first_name_kana = "ヨウコソ"
-      user.telephone_number = "1234567890"
-    end
+    User.find_by(login_id: 'guest@example')
   end
 
 end

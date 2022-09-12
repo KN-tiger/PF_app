@@ -27,5 +27,9 @@ class Admin < ApplicationRecord
   def email_changed?
     false
   end
+  
+  def self.guest
+    Admin.find_by(login_id: 'guest@example')
+  end
 
 end

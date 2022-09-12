@@ -18,13 +18,13 @@
               </tr>
             </thead>
             <tbody>
-              <% @carts.each do |cart| %>
+              <% @cart_items.each do |cart_item| %>
                 <tr>
-                  <td class="border-right-0"><%= image_tag cart.item.get_image(80,60) %></td>
-                  <td class="border-left-0"><%= cart.item.name %></td>
-                  <td>￥<%= cart.item.price_with_tax.to_s(:delimited) %></td>
-                  <td><%= cart.amount %></td>
-                  <td>￥<%= cart.subtotal.to_s(:delimited) %></td>
+                  <td class="border-right-0"><%= image_tag cart_item.item.get_image(80,60) %></td>
+                  <td class="border-left-0"><%= cart_item.item.name %></td>
+                  <td>￥<%= cart_item.item.price_with_tax.to_s(:delimited) %></td>
+                  <td><%= cart_item.amount %></td>
+                  <td>￥<%= cart_item.subtotal.to_s(:delimited) %></td>
                 </tr>
               <% end %>
             </tbody>

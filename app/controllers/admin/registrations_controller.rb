@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Admin::RegistrationsController < Devise::RegistrationsController
-  before_action :redirect_root
+  before_action :authenticate_admin!
   prepend_before_action :require_no_authentication, only: [:cancel]
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -47,19 +47,16 @@ class Admin::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(:sign_up, keys: [:login_id])
   end
 
-  def current_user_is_admin?
-    admin_signed_in?
-  end
-
   def sign_up(resource_name, resource)
-    if !current_user_is_admin?
+    if !admin_signed_in?
       sign_in(resource_name, resource)
     end
   end
 
-  def redirect_root
-    redirect_to new_admin_session_path unless admin_signed_in?
+  def after_sign_up_path_for(resource)
+    admin_admins_path(resource)
   end
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])

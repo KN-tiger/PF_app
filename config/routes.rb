@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'admin/index'
-  end
   scope module: :public do
     root to: "homes#top"
     get '/about', to: 'homes#about', as: 'about'
@@ -18,7 +15,10 @@ Rails.application.routes.draw do
     resources :admins, only: [:index,:show]
     resources :messages, only: [:create]
     resources :rooms, only: [:create,:show]
-    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in', as: 'users_guest_sign_in'
   end
 
   devise_for :users,skip: [:passwords], controllers: {
@@ -43,7 +43,10 @@ Rails.application.routes.draw do
     end
     resources :messages, only: [:create]
     resources :rooms, only: [:create,:show]
-    post 'admins/guest_sign_in', to: 'admins/sessions#guest_sign_in'
+  end
+
+  devise_scope :admin do
+    post 'admins/guest_sign_in', to: 'admin/sessions#guest_sign_in', as: 'admins_guest_sign_in'
   end
 
   devise_for :admin,skip: [:passwords], controllers: {

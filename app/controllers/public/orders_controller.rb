@@ -1,20 +1,28 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_user, except: [:new, :confirm]
+  before_action :ensure_guest_user, except: [:new, :confirm]
 
   def new
     @order = Order.new
   end
 
   def confirm
+    @order = Order.new(order_params)
     @cart_items = current_user.cart_items.all
-    @total = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
+    @total_tax = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.tax_total }
+    @total_payment = @cart_items.inject(0) { |sum, cart_item| sum + cart_item.subtotal }
+    if @order.delivery == "" || @order.deadline == ""
+      flash[:alert] = "納品先と納期は必ず入力してください。"
+      render :new
+    end
   end
 
   def create
-    cart_items = current_user.cart_items.all
     @order = current_user.orders.new(order_params)
-    if @order.save
+    cart_items = current_user.cart_items.all
+    if params[:back] || !@order.save
+      render :new
+    elsif @order.save
       cart_items.each do |cart_item|
         order_item = OrderItem.new
         order_item.order_id = @order.id
@@ -25,40 +33,45 @@ class Public::OrdersController < ApplicationController
       end
       redirect_to orders_complete_path
       cart_items.destroy_all
-    else
-      @order = Order.new(order_params)
-      render :new
     end
   end
 
   def index
-    @orders = Kaminari.paginate_array(current_user.orders.reverse).page(params[:page]).per(10)
+    @orders = current_user.orders.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   def show
     @order = Order.find(params[:id])
     @order_items = @order.order_items
-    @total = 0
-    @order_items.each do |item|
-      @total += ( item.price_with_tax * item.amount )
-    end
+   
   end
 
+  def update
+    @order = Order.find(params[:id])
+    # 注文ステータスが納品完了になったらすべての発注ステータス：納品完了に変更
+    if @order.order_status == 2
+      @order.update(order_status: 3)
+      @order.order_items.each do |order_item|
+        order_item.update(provision_status: 3)
+      end
+      flash[:notice] = "注文ステータスを更新しました。"
+    else
+      flash[:alert] = "注文ステータスを確認してください。"
+    end
+    redirect_to order_path(@order.id)
+  end
 
   private
 
   def order_params
-    params.require(:order).permit(:postal_code, :address, :name, :payment_method, :postage, :total_payment)
+    params.require(:order).permit(:user_id, :delivery, :deadline, :total_payment, :payment_method, :note)
   end
 
-  def destination_params
-    params.require(:destination).permit(:user_id, :postal_code, :address, :name)
-  end
-
-  def ensure_user
-    if current_user.login_id == "guest@sample"
-      current_user.cart_items.destroy_all
-      flash[:alert] = "ゲストユーザーは注文できません。"
+  def ensure_guest_user
+    @user = current_user
+    if @user.login_id == "guest@example"
+      flash[:alert] = "ゲストユーザーはアクセスできません"
+      @user.cart_items.destroy_all
       redirect_to items_path
     end
   end

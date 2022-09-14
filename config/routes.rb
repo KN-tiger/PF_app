@@ -9,12 +9,12 @@ Rails.application.routes.draw do
     resources :cart_items, except: [:show,:new,:edit]
     post 'orders/confirm', to: 'orders#confirm', as: 'orders_confirm'
     get 'orders/complete', to: 'orders#complete', as: 'orders_complete'
-    resources :orders, except: [:edit,:update,:destroy]
+    resources :orders, except: [:edit,:destroy]
     resources :genres, only: [:show]
     resources :tags, only: [:show]
     resources :admins, only: [:index,:show]
-    resources :messages, only: [:create]
-    resources :rooms, only: [:create,:show]
+    resources :user_messages, only: [:create]
+    resources :rooms, only: [:index,:create,:show]
   end
 
   devise_scope :user do
@@ -38,11 +38,10 @@ Rails.application.routes.draw do
     resources :users, except: [:new,:create,:destroy]
     patch 'admins/:id/deactivate', to: 'admins#deactivate', as: 'admins_deactivate'
     resources :admins, except: [:new,:create,:destroy]
-    resources :orders, only: [:index,:show,:update] do
-      resources :order_items, only: [:update]
-    end
-    resources :messages, only: [:create]
-    resources :rooms, only: [:create,:show]
+    resources :orders, only: [:index,:show,:update]
+    resources :order_items, only: [:update]
+    resources :admin_messages, only: [:create]
+    resources :rooms, only: [:index,:create,:show]
   end
 
   devise_scope :admin do

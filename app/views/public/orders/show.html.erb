@@ -1,30 +1,20 @@
 <div class="container py-5">
   <div class="row">
     <div class="col-md-10 mx-auto">
-
-      <div class="row-md-10 pb-3">
-        <h2>注文履歴詳細</h2>
-      </div>
-
+      <h2>注文履歴詳細</h2>
       <div class="row pb-3">
-        <div class="col-md-7">
-          <span class="font-weight-bold">注文情報</span>
+        <div class="col-md-6">
+          <h5 class="font-weight-bold mt-5">注文情報</h5>
           <table class="table table-bordered">
             <tr>
               <td class="bg-light">注文日</td>
-              <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+              <td><%= @order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
             </tr>
             <tr>
-              <td class="bg-light">配送先</td>
+              <td class="bg-light">納品先</td>
               <td>
-                〒<%= @order.postal_code.insert(3, "-") %><br>
-                <%= @order.address %><br>
-                <%= @order.name %>
+                <%= @order.delivery %>
               </td>
-            </tr>
-            <tr>
-              <td class="bg-light">支払方法</td>
-              <td><%= @order.payment_method_i18n %></td>
             </tr>
             <tr>
               <td class="bg-light">ステータス</td>
@@ -32,30 +22,24 @@
             </tr>
           </table>
         </div>
-
-        <div class="col-md-3">
-          <span class="font-weight-bold">請求情報</span>
+        <div class="col-md-4">
+          <h5 class="font-weight-bold mt-5">請求情報</h5>
           <table class="table table-bordered">
             <tr>
-              <td class="bg-light">商品合計</td>
-              <td><%= @total.to_s(:delimited) %></td>
-            </tr>
-            <tr>
-              <td class="bg-light">配送料</td>
-              <td><%= @order.postage %></td>
-            </tr>
-            <tr>
               <td class="bg-light">ご請求額</td>
-              <td><%= @order.total_payment.to_s(:delimited) %></td>
+              <td>￥<%= @order.total_payment.to_s(:delimited) %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">お支払い方法</td>
+              <td><%= @order.payment_method_i18n %></td>
             </tr>
           </table>
         </div>
       </div>
 
-
       <div class="row">
         <div class="col-md-10">
-          <span class="font-weight-bold">注文内容</span>
+          <h5 class="font-weight-bold">注文内容</h5>
           <table class="table table-bordered">
             <thead class="thead-light">
               <tr>
@@ -72,11 +56,20 @@
                 <td><%= order_item.item.name %></td>
                 <td><%= order_item.price_with_tax.to_s(:delimited) %></td>
                 <td><%= order_item.amount %></td>
-                <td><%= ( order_item.price_with_tax * order_item.amount ).to_s(:delimited) %></td>
+                <td><%= order_item.sub_total.to_s(:delimited) %></td>
               </tr>
               <% end %>
             </tbody>
           </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10">
+          <h5 class="font-weight-bold">備考</h5>
+          <div class="p-3"><%= @order.note %></div>
+          <div class="text-center">
+            <%= link_to "納品を完了する", order_path, method: :patch, class: "btn btn-success w-50 mt-3" %>
+          </div>
         </div>
       </div>
     </div>

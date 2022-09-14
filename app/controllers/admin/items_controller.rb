@@ -1,5 +1,6 @@
 class Admin::ItemsController < ApplicationController
   before_action :authenticate_admin!
+  before_action :ensure_guest_user, except: [:index, :show, :edit, :new]
 
   def index
     @items = Item.all.page(params[:page]).per(8)
@@ -14,7 +15,7 @@ class Admin::ItemsController < ApplicationController
     @item_new = Item.new(item_params)
     if @item_new.save
       flash[:notice] = "商品を登録しました"
-      redirect_to admin_item_path(@item)
+      redirect_to admin_item_path(@item_new)
     else
       flash[:alert] = "商品の登録に失敗しました"
       @genres = Genre.all
@@ -50,5 +51,12 @@ class Admin::ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:genre_id, :name, :introduction, :price_without_tax, :is_stopped, :image)
   end
-
+  
+  def ensure_guest_user
+    @admin = current_admin
+    if @admin.login_id == "guest@example"
+      flash[:alert] = "ゲストユーザーはアクセスできません"
+      redirect_to admin_root_path
+    end
+  end
 end

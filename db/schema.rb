@@ -122,6 +122,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_042844) do
     t.string "delivery", null: false
     t.date "deadline", null: false
     t.integer "total_payment", null: false
+    t.integer "payment_method", default: 0, null: false
     t.text "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

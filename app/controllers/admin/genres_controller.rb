@@ -1,6 +1,6 @@
 class Admin::GenresController < ApplicationController
   before_action :authenticate_admin!
-
+  before_action :ensure_guest_user, except: [:index, :edit]
   def index
     @genres = Genre.all
     @genre_new = Genre.new
@@ -37,4 +37,12 @@ class Admin::GenresController < ApplicationController
     params.require(:genre).permit(:name)
   end
 
+  def ensure_guest_user
+    @admin = current_admin
+    if @admin.login_id == "guest@example"
+      flash[:alert] = "ゲストユーザーはアクセスできません"
+      redirect_to admin_root_path
+    end
+  end
+  
 end

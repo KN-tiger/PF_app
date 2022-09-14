@@ -4,6 +4,9 @@ class Admin < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :authentication_keys => [:login_id]
+  
+  has_many :admin_massages, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   validates :login_id, uniqueness: true, presence: true
   validates :last_name, presence: true

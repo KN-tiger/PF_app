@@ -7,9 +7,10 @@
         <%= form_with model: @item, url: admin_item_path(@item), method: :patch, local: true do |f| %>
           <div class="field d-flex mb-3">
             <div class="w-25">商品画像</div>
+            <!--画像プレビュー機能によるDB保存エラー回避のために記載-->
             <% if @item_old_image %>
               <%= image_tag @item_old_image.get_image(300,200) %>
-            <% elsif @item.image.attached?%>
+            <% elsif @item.image.attached? %>
               <%= image_tag @item.get_image(300,200) %>
             <% end %>
           </div>

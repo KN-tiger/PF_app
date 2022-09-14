@@ -6,7 +6,9 @@ class User < ApplicationRecord
          :authentication_keys => [:login_id]
 
   has_many :cart_items, dependent: :destroy
-  has_many :orders
+  has_many :orders, dependent: :destroy
+  has_many :user_massages, dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   validates :login_id, uniqueness: true, presence: true
   validates :last_name, presence: true

@@ -6,26 +6,27 @@
 
     <div class='col-md-8 offset-1'>
       <%= render 'layouts/errors', obj: @cart_item %>
-
-      <div class='d-flex flex-row'>
-        <div class="w-50 p-1">
-          <%= image_tag @item.get_image(360,270), class: "w-75" %>
-        </div>
-
-        <div class="w-50 p-1">
-          <h3><%= @item.name %></h3>
-          <p><%= @item.introduction %></p>
-          <p>￥<%= @item.price_with_tax.to_s(:delimited) %>(税込)</p>
-
-          <% if @item.is_stopped == false %>
-            <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
-              <%= f.hidden_field :item_id, :value => @item.id %>
-              <%= f.select(:amount, *[1..10],{ :include_blank => '個数選択' }, :required => true, class: "form-select mr-3") %>
-              <%= f.submit "カートに入れる", class: "btn btn-success w-50" %>
-            <% end %>
-          <% else %>
-            <p class="font-weight-bold text-danger">売り切れのためご購入いただけません</p>
-          <% end %>
+      <div class="row-md-12">
+        <div class='d-flex flex-row'>
+          <div class="col-md-5 p-1">
+            <%= image_tag @item.get_image(360,270) %>
+          </div>
+          <div class="col-md-7">
+            <h3><%= @item.name %></h3>
+            <p><%= @item.introduction %></p>
+            <p>￥<%= @item.price_with_tax.to_s(:delimited) %>(税込)</p>
+              <% if @item.is_stopped == false %>
+                <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
+                  <%= f.hidden_field :item_id, :value => @item.id %>
+                  <div class="order-form col-md-10">
+                    <%= f.select(:amount, *[1..10],{ :include_blank => '個数選択' }, :required => true, class: "form-select form-control") %>
+                  </div>
+                  <%= f.submit "カートに入れる", class: "btn btn-success mt-3" %>
+                <% end %>
+              <% else %>
+                <p class="font-weight-bold text-danger">売り切れのためご購入いただけません</p>
+              <% end %>
+          </div>
         </div>
       </div>
     </div>

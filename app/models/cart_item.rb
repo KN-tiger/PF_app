@@ -5,6 +5,12 @@ class CartItem < ApplicationRecord
   def subtotal
     item.price_with_tax * amount
   end
+  
+  def tax_total
+    a = item.price_without_tax * amount
+    b = item.price_with_tax * amount
+    b-a
+  end
 
   def max_amount
     if self.amount < 20

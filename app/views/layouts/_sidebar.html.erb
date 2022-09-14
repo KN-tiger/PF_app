@@ -1,24 +1,14 @@
-<table class="table border">
-  <thead class="table-dark">
-    <tr>
-      <th>
-        ジャンル検索
-      <th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>
-        <ul class="list-group list-group-flush">
-          <% genres.each do |genre| %>
-            <% if genre.items.count != 0 %>
-              <li class="list-group-item">
-                <%= link_to genre.name, genre_path(genre) %>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
-      <th>
-    </tr>
-  </tbody>
-</table>
+<div class="d-flex flex-column flex-shrink-0 p-3">
+  <h3 class="border-bottom">ジャンル検索</h3>
+  <div class="list-group list-group-flush border-bottom scrollarea">
+    <% genres.each do |genre| %>
+      <% if genre.items.count != 0 %>
+        <div class="list-group-item list-group-item-action py-3 lh-sm">
+          <span>
+            <%= link_to genre.name, genre_path(genre),class: 'd-flex w-100 align-items-center justify-content-between' %>
+          </span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>  
+</div>

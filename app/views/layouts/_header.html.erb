@@ -10,13 +10,13 @@
       <% end %>
       <% if user_signed_in? %>
         <div class="login_infomation">
-          <span class="navbar-text">ログイン中：<%= current_user.last_name %></span><br>
+          <span class="navbar-text">ログイン中：<%= current_user.full_name %></span><br>
           <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'text-danger' %>
         </div>
       <% elsif admin_signed_in? %>
         <div class="login_infomation">
           <i class="fa-solid fa-user-tie fa-2x" style="color:#cc5264;"></i>
-          <span class="navbar-text">管理者ログイン中：<%= current_admin.last_name %></span><br>
+          <span class="navbar-text">管理者ログイン中：<%= current_admin.full_name %></span><br>
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'text-danger' %>
         </div>
       <% end %>

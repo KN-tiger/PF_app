@@ -1,0 +1,34 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <h2 class="font-weight-bold">DM一覧</h2>
+      <div class="row-md-10 mt-3 pb-3">
+        <table class='table'>
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @another_entries.each do |entry| %>
+              <tr>
+                <td></td>
+                <td><%= entry.admin.full_name%></td>
+                <td>
+                  <%= link_to room_path(entry.room_id) do %>
+                    <i class="fas fa-envelope"></i><%= AdminMessage.find_by(id: entry.room.admin_message_ids.last)&.body %>
+                  <%end%>
+                </td>
+              </tr>
+            <%end%>
+          </tbody>
+        </table>
+      </div>
+      <div class="text-center">
+        <%= link_to "事務員一覧へ", admins_path, class: "btn btn-primary w-50" %>
+      </div>
+    </div>
+  </div>
+</div>

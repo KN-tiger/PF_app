@@ -2,6 +2,7 @@
 
 class Public::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_admin!
+  before_action :ensure_guest_user
   prepend_before_action :require_no_authentication, only: [:cancel]
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -50,6 +51,14 @@ class Public::RegistrationsController < Devise::RegistrationsController
   def sign_up(resource_name, resource)
     if !admin_signed_in?
       sign_in(resource_name, resource)
+    end
+  end
+
+  def ensure_guest_user
+    @admin = current_admin
+    if @admin.login_id == "guest@example"
+      flash[:alert] = "ゲストユーザーはアクセスできません"
+      redirect_to admin_root_path
     end
   end
 

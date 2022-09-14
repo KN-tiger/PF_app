@@ -1,84 +1,73 @@
 <div class='container py-5'>
   <div class='row'>
     <div class="col-md-10 mx-auto">
-
-      <div class="row-md-10">
-        <h2>注文情報確認</h2>
-      </div>
-
-      <div class="d-flex flex-wrap">
-        <div class="w-75 p-1">
-          <table class='table table-bordered'>
-            <thead class="thead-light">
-              <tr>
-                <th colspan="2">商品名</th>
-                <th>単価（税込）</th>
-                <th>数量</th>
-                <th>小計</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @cart_items.each do |cart_item| %>
-                <tr>
-                  <td class="border-right-0"><%= image_tag cart_item.item.get_image(80,60) %></td>
-                  <td class="border-left-0"><%= cart_item.item.name %></td>
-                  <td>￥<%= cart_item.item.price_with_tax.to_s(:delimited) %></td>
-                  <td><%= cart_item.amount %></td>
-                  <td>￥<%= cart_item.subtotal.to_s(:delimited) %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-
-        <div class="w-25 p-1">
-          <table class='table table-bordered'>
+      <h2>注文情報確認</h2>
+      <table class='table table-bordered mt-5'>
+        <thead class="thead-light">
+          <tr>
+            <th colspan="2">商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
             <tr>
-              <td class="bg-light">送料</td>
-              <td>￥<%= @order.postage.to_s(:delimited) %></td>
+              <td class="border-right-0"><%= image_tag cart_item.item.get_image(80,60) %></td>
+              <td class="border-left-0"><%= cart_item.item.name %></td>
+              <td>￥<%= cart_item.item.price_with_tax.to_s(:delimited) %></td>
+              <td><%= cart_item.amount %></td>
+              <td>￥<%= cart_item.subtotal.to_s(:delimited) %></td>
             </tr>
-            <tr>
-              <td class="bg-light">商品合計</td>
-              <td>￥<%= @total.to_s(:delimited) %></td>
-            </tr>
-            <tr>
-              <td class="bg-light">請求金額</td>
-              <td>￥<%= @total_payment.to_s(:delimited) %></td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="row-md-10 pb-3">
-        <div class="col-md-10">
+          <% end %>
+        </tbody>
+      </table>
+      <div class="d-flex flex-wrap mt-5">
+        <div class="col-md-7">
           <table class='table table-borderless'>
             <tr>
-              <td class="font-weight-bold">支払方法</td>
-              <td class="pl-3">
-                <%= @order.payment_method_i18n %>
-              </td>
+              <td class="font-weight-bold">納品先</td>
+              <td><%= @order.delivery %>
             </tr>
             <tr>
-              <td class="font-weight-bold">お届け先</td>
-              <td>〒<%= @order.postal_code.to_s.insert(3, "-") %> <%= @order.address %><br><%= @order.name %></td>
+              <td class="font-weight-bold">納期</td>
+              <td><%= @order.deadline.strftime("%Y年 %m月 %d日") %></td>
+            </tr>
+            <tr>
+              <td class="font-weight-bold">備考</td>
+              <td><%= @order.note %>
+            </tr>
+          </table>
+        </div>
+        <div class="col-md-5">
+          <table class='table table-bordered'>
+            <tr>
+              <td class="bg-light">消費税合計</td>
+              <td>￥<%= @total_tax.to_s(:delimited) %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">合計金額（税込み）</td>
+              <td>￥<%= @total_payment.to_s(:delimited) %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">支払方法</td>
+              <td><%= @order.payment_method_i18n %></td>
             </tr>
           </table>
         </div>
       </div>
-
       <div class="row-md-10 pb-3">
-        <div class="col-md-10">
-          <div class="text-center mt-5 mb-5">
+        <div class="d-flex flex-wrap mt-5 justify-content-center">
             <%= form_with model: @order, method: :post, local: true do |f| %>
-              <%= f.hidden_field :postal_code %>
-              <%= f.hidden_field :address %>
-              <%= f.hidden_field :name %>
-              <%= f.hidden_field :payment_method %>
-              <%= f.hidden_field :postage %>
+              <%= f.hidden_field :delivery %>
+              <%= f.hidden_field :deadline %>
+              <%= f.hidden_field :note %>
               <%= f.hidden_field :total_payment, value: @total_payment %>
-              <%= f.submit "注文を確定する", class: "btn btn-success" %>
+              <%= f.hidden_field :payment_method %>
+              <%= f.submit "情報を修正する", name: :back, class: "btn btn-primary w-40 mr-3" %>
+              <%= f.submit "注文を確定する", class: "btn btn-success w-40" %>
             <% end %>
-          </div>
         </div>
       </div>
     </div>

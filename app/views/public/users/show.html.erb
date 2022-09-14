@@ -25,9 +25,41 @@
           </tr>
         </table>
       </div>
-
-      <div class="row-md-10 pb-3">
-        <h3 class="w-25">注文履歴</h3>
+      <div class="text-center">
+        <%= link_to "DMを確認する", rooms_path, class: "btn btn-info w-50" %>
+      </div>
+      <div class="row-md-10 mt-3 pb-3">
+        <h3>最新の注文履歴（5件）</h3>
+        <table class="table mt-3">
+          <thead class="thead-light">
+            <tr>
+              <th>注文日</th>
+              <th>納品先</th>
+              <th>注文商品</th>
+              <th>支払金額</th>
+              <th>ステータス</th>
+              <th>注文詳細</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @orders.each do |order| %>
+            <tr class=<%= "order_status_#{order.order_status}" %>>
+              <td><%= order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+              <td>
+                <%= order.delivery %>
+              </td>
+              <td>
+                <% order.items.each do |item| %>
+                <%= item.name %><br>
+                <% end %>
+              </td>
+              <td><%= order.total_payment.to_s(:delimited) %>円</td>
+              <td><%= order.order_status_i18n %></td>
+              <td><%= link_to "表示する", order_path(order), class: "btn btn-sm btn-primary" %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
         <div class="text-center">
           <%= link_to "過去の注文履歴を見る", orders_path, class: "btn btn-success w-50" %>
         </div>

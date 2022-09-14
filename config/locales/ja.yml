@@ -2,17 +2,21 @@ ja:
   enums:
     order:
       order_status:
-        waiting: "入金待ち"
-        paid_up: "入金確認"
-        making: "制作中"
-        preparing: "発送準備中"
-        shipped: "発送済"
+        ordered: "注文済"
+        waiting_arrival: "入荷待ち"
+        arrived: "納品可能"
+        complete: "納品完了"
+      payment_method: 
+        cash: "現金払い"
+        credit_card: "クレジットカード"
+        bank_transfer: "口座振込"
+        electronic_money: "電子決済"
     order_item:
-      making_status:
-        unable: "着手不可"
-        waiting: "制作待ち"
-        making: "制作中"
-        finish: "制作完了"
+      provision_status:
+        unable: "発注待ち"
+        arranged: "発注済"
+        arrived: "入荷済"
+        complete: "納品完了"
   activerecord:
     models:
       destination: 配送先

@@ -2,6 +2,7 @@
 
 class Admin::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_admin!
+  before_action :ensure_guest_user
   prepend_before_action :require_no_authentication, only: [:cancel]
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -55,6 +56,14 @@ class Admin::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     admin_admins_path(resource)
+  end
+
+  def ensure_guest_user
+    @admin = current_admin
+    if @admin.login_id == "guest@example"
+      flash[:alert] = "ゲストユーザーはアクセスできません"
+      redirect_to admin_root_path
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.

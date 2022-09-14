@@ -1,17 +1,18 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_admin!
+  before_action :ensure_guest_user, except: [:index, :show, :edit]
   before_action :ensure_user, except: [:index]
-  
+
   def index
-    @users = User.all.page(params[:page]).per(10)
+    @users = User.where.not(login_id: 'guest@example').page(params[:page]).per(10)
   end
 
   def show
-    
+
   end
 
   def edit
-    
+
   end
 
   def update
@@ -22,7 +23,7 @@ class Admin::UsersController < ApplicationController
       render :edit
     end
   end
-  
+
   def deactivate
     @user.update(is_deleted: true)
     flash[:notice] = "無効処理を実行しました"
@@ -38,9 +39,17 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:last_name, :first_name, :last_name_kana, :first_name_kana, :login_id, :telephone_number, :is_deleted)
   end
-  
+
   def ensure_user
     @user = User.find(params[:id])
+  end
+
+  def ensure_guest_user
+    @admin = current_admin
+    if @admin.login_id == "guest@example"
+      flash[:alert] = "ゲストユーザーはアクセスできません"
+      redirect_to admin_root_path
+    end
   end
 
 end

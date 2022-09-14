@@ -1,17 +1,13 @@
 <div class="container py-5">
   <div class="row">
     <div class="col-md-12 mx-auto">
-
-      <div class="row-md-12 pb-3">
         <h2>注文履歴一覧</h2>
-      </div>
-
-      <div class="row-md-12 pb-3">
+      <div class="row-md-12 mt-5 pb-3">
         <table class="table">
           <thead class="thead-light">
             <tr>
               <th>注文日</th>
-              <th>配送先</th>
+              <th>納品先</th>
               <th>注文商品</th>
               <th>支払金額</th>
               <th>ステータス</th>
@@ -21,16 +17,14 @@
 
           <tbody>
             <% @orders.each do |order| %>
-            <tr>
-              <td><%= order.created_at.strftime('%Y/%m/%d') %></td>
+            <tr class=<%= "order_status_#{order.order_status}" %>>
+              <td><%= order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
               <td>
-                〒<%= order.postal_code.insert(3, "-") %><br>
-                <%= order.address %><br>
-                <%= order.name %>
+                <%= order.delivery %>
               </td>
               <td>
                 <% order.items.each do |item| %>
-                <%= item.name %><br>
+                 <%= item.name %><br>
                 <% end %>
               </td>
               <td><%= order.total_payment.to_s(:delimited) %>円</td>

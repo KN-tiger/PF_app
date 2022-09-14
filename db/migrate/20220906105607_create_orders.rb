@@ -6,6 +6,7 @@ class CreateOrders < ActiveRecord::Migration[6.1]
       t.string :delivery, null: false
       t.date :deadline, null: false
       t.integer :total_payment, null: false
+      t.integer :payment_method, null: false, default: 0
       t.text :note
       t.timestamps
     end

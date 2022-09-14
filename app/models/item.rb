@@ -1,8 +1,9 @@
 class Item < ApplicationRecord
 
   belongs_to :genre
-  has_many :order_items
-  has_many :cart_items
+  has_many :order_items, dependent: :destroy
+  has_many :cart_items, dependent: :destroy
+  has_many :item_tags, dependent: :destroy
 
   has_one_attached :image
 
@@ -17,7 +18,7 @@ class Item < ApplicationRecord
     tax = 1 + 0.10
     ( self.price_without_tax * tax).floor
   end
-
+  
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

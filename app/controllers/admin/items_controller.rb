@@ -3,7 +3,8 @@ class Admin::ItemsController < ApplicationController
   before_action :ensure_guest_user, except: [:index, :show, :edit, :new]
 
   def index
-    @items = Item.all.page(params[:page]).per(8)
+    @items = Item.page(params[:page]).per(8)
+    @total_items = Item.all
   end
 
   def new
@@ -13,7 +14,9 @@ class Admin::ItemsController < ApplicationController
 
   def create
     @item_new = Item.new(item_params)
+    tag_list = params[:item][:tag_ids].split(',')
     if @item_new.save
+      @item_new.save_tags(tag_list)
       flash[:notice] = "商品を登録しました"
       redirect_to admin_item_path(@item_new)
     else
@@ -29,12 +32,15 @@ class Admin::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
+    @tag_list =@item.tags.pluck(:name).join(",")
     @genres = Genre.all
   end
 
   def update
     @item = Item.find(params[:id])
+    tag_list = params[:item][:tag_ids].split(',')
     if @item.update(item_params)
+      @item.save_tags(tag_list)
       flash[:notice] = "商品情報を変更しました"
       redirect_to admin_item_path(@item)
     else

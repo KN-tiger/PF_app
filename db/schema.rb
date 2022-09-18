@@ -40,14 +40,6 @@ ActiveRecord::Schema.define(version: 2022_09_09_042844) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "admin_messages", force: :cascade do |t|
-    t.integer "admin_id", null: false
-    t.integer "room_id", null: false
-    t.text "massage", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "admins", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -75,14 +67,6 @@ ActiveRecord::Schema.define(version: 2022_09_09_042844) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "entries", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "admin_id", null: false
-    t.integer "room_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "genres", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -94,6 +78,7 @@ ActiveRecord::Schema.define(version: 2022_09_09_042844) do
     t.integer "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id", "tag_id"], name: "index_item_tags_on_item_id_and_tag_id", unique: true
   end
 
   create_table "items", force: :cascade do |t|
@@ -128,21 +113,8 @@ ActiveRecord::Schema.define(version: 2022_09_09_042844) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "user_messages", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "room_id", null: false
-    t.text "massage", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

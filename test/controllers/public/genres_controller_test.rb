@@ -1,6 +1,6 @@
 require "test_helper"
 
-class RoomTest < ActiveSupport::TestCase
+class Public::GenresControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

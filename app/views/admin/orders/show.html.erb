@@ -64,7 +64,7 @@
 
             <tbody>
               <% @order_items.each do |order_item| %>
-              <tr>
+              <tr class=<%= "order_item_status_#{order_item.provision_status}" %>>
                 <td><%= order_item.item.name %></td>
                 <td><%= order_item.price_with_tax.to_s(:delimited) %></td>
                 <td><%= order_item.amount %></td>

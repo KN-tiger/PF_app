@@ -5,8 +5,6 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :authentication_keys => [:login_id]
   
-  has_many :admin_massages, dependent: :destroy
-  has_many :entries, dependent: :destroy
 
   validates :login_id, uniqueness: true, presence: true
   validates :last_name, presence: true
@@ -29,6 +27,15 @@ class Admin < ApplicationRecord
 
   def email_changed?
     false
+  end
+  
+  def self.search(word)
+    if word != ""
+      Admin.where(['last_name LIKE ? OR first_name LIKE ?', "%#{word}%", "%#{word}%"])
+      #部分一致で検索
+    else
+      Admin.all
+    end    
   end
   
   def self.guest

@@ -36,6 +36,11 @@
             <%= f.label :genre_id, "ジャンル", class: "w-25" %><br>
             <%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "選択して下さい", class: "form-select w-50" %>
           </div>
+          
+          <div class="field d-flex mb-3">
+            <%= f.label :tag_ids, "検索用タグ", class: "w-25" %><br>
+            <%= f.text_field :tag_ids, value: @tag_list, placeholder: "タグをつける。複数つけるには','で区切ってください。", class: "form-control w-50" %>
+          </div>
 
           <div class="field d-flex mb-3">
             <%= f.label :price_without_tax, "税抜価格", class: "w-25" %><br>

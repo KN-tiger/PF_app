@@ -1,0 +1,39 @@
+  <% if @range == "事務員" %>
+    <% if @admins == [] %>
+      <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
+    <% else %>
+  　  <%= render 'admin/admins/index' %>
+  　<% end %>
+　<% elsif @range == "注文" %>
+　  <% if @orders == [] %>
+      <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
+    <% else %>
+  　  <%= render 'admin/orders/index' %>
+  　<% end %>
+  <% elsif @range == "営業" %>
+　  <% if @users == [] %>
+      <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
+    <% else %>
+  　  <%= render 'admin/users/index' %>
+  　<% end %>
+  <% elsif @range == "商品" %>
+    <% if @items == [] %>
+      <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
+    <% else %>
+      <div class="container py-5">
+        <div class="row">
+          <div class="col-md-10 mx-auto">
+            <div class="row-md-10 pb-3">
+              <div class="d-flex">
+                <h2 class="mr-auto">商品一覧（全<%= @items.count %>件）</h2>
+                <%= link_to(new_admin_item_path, method: :get) do %>
+                  <i class="fa-solid fa-circle-plus plus"></i>
+                <% end %>
+              </div>
+            </div>
+            <%= render 'admin/items/index' %>
+          </div>
+        </div>
+      </div>
+  　<% end %>
+  <% end %>

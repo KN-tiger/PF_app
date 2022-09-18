@@ -1,6 +1,6 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_guest_user, except: [:new, :confirm]
+  before_action :ensure_guest_user, except: [:index, :new, :confirm]
 
   def new
     @order = Order.new

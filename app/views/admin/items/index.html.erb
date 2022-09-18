@@ -3,44 +3,13 @@
     <div class="col-md-10 mx-auto">
       <div class="row-md-10 pb-3">
         <div class="d-flex">
-          <h2 class="mr-auto">商品一覧</h2>
+          <h2 class="mr-auto">商品一覧（全<%= @total_items.count %>件）</h2>
           <%= link_to(new_admin_item_path, method: :get) do %>
             <i class="fa-solid fa-circle-plus plus"></i>
           <% end %>
         </div>
       </div>
-        <table class="table mt-3 mb-5">
-          <thead class="thead-light">
-            <tr>
-              <th>商品ID</th>
-              <th></th>
-              <th>商品名</th>
-              <th>税抜価格</th>
-              <th>ジャンル</th>
-              <th>ステータス</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @items.each do |item| %>
-            <tr>
-              <td><%= item.id %></td>
-              <td><%= image_tag item.get_image(50, 50) %></td>
-              <td><%= link_to item.name, admin_item_path(item) %></td>
-              <td><%= item.price_without_tax.to_s(:delimited) %></td>
-              <td><%= item.genre.name %></td>
-              <% if item.is_stopped == false %>
-                <td class="text-success">販売中</td>
-              <% else %>
-                <td class="text-black-50">販売停止中</td>
-              <% end %>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <div class="mb-3">
-          <%= paginate @items %>
-        </div>  
-      </div>
+      <%= render 'admin/items/index' %>
     </div>
   </div>
 </div>

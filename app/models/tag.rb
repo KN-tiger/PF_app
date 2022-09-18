@@ -1,5 +1,8 @@
 class Tag < ApplicationRecord
   
-  has_many :item_s, dependent: :destroy
+  has_many :item_tags, dependent: :destroy
+  has_many :items, through: :item_tags
+  
+  validates :tagname, presence: true
   
 end

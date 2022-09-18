@@ -25,6 +25,14 @@
               <td><%= @item.genre.name %></td>
             </tr>
             <tr>
+              <th>検索用タグ</th>
+                <div class="d-flex flex-wrap">
+                  <% @item.tags.each do |tag| %>
+                    <td><%= tag.name %></td>
+                  <% end %>
+                </div>  
+            </tr>
+            <tr>
               <th>税込価格<br>(税抜価格)</th>
               <td>
                 <%= @item.price_with_tax.to_s(:delimited) %>

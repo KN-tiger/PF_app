@@ -4,7 +4,7 @@ class Admin::OrdersController < ApplicationController
   before_action :ensure_guest_user, except: [:index, :show]
 
   def index
-    @orders = Order.order(id: "DESC").page(params[:page]).per(10)
+    @orders = Order.includes(:user).order(id: "DESC").page(params[:page]).per(10)
   end
 
   def show

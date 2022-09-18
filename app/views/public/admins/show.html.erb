@@ -36,17 +36,6 @@
               <%= @admin.telephone_number %>
             </th>
           </tr>
-          <tr>
-            <th></th>
-            <th class="mt-5">
-              <%= form_for @room do |f| %>
-                <%= f.hidden_field :admin_id, value: @admin.id %>
-                <%= f.button :type => "submit", class: 'btn btn-info' do %>
-                  <i class="fas fa-envelope"></i>DMを送る
-                <% end %>
-              <% end %>
-            </th>
-          </tr>
         </table>
       </div>
     </div>

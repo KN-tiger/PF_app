@@ -7,8 +7,6 @@ class User < ApplicationRecord
 
   has_many :cart_items, dependent: :destroy
   has_many :orders, dependent: :destroy
-  has_many :user_massages, dependent: :destroy
-  has_many :entries, dependent: :destroy
 
   validates :login_id, uniqueness: true, presence: true
   validates :last_name, presence: true
@@ -31,6 +29,15 @@ class User < ApplicationRecord
 
   def full_name_kana
     last_name_kana + " " + first_name_kana
+  end
+  
+  def self.search(word)
+    if word != ""
+      User.where(['last_name LIKE ? OR first_name LIKE ?', "%#{word}%", "%#{word}%"])
+      #部分一致で検索
+    else
+      User.all
+    end    
   end
 
   def self.guest

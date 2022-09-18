@@ -1,0 +1,56 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <h2 class="mr-auto">事務員一覧</h2>
+      <div class="row-md-10 pb-3">
+        <div class="d-flex">
+          <table class="table mt-3 mb-5">
+            <thead class="thead-light">
+              <tr>
+                <th>
+                  社員ID
+                </th>
+                <th>
+                  氏名
+                </th>
+                <th>
+                  電話番号
+                </th>
+                <th>
+                  ステータス
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @admins.each do |admin| %>
+              <tr>
+                <th>
+                  <%= admin.login_id %>
+                </th>
+                <th>
+                  <%= link_to admin_path(admin.id), method: :get do %>
+                    <%= admin.full_name %>
+                  <% end %>
+                </th>
+                <th>
+                  <%= admin.telephone_number %>
+                </th>
+                <th>
+                  <% if admin.is_deleted == false %>
+                    有効
+                  <% else %>
+                    無効
+                  <% end %>
+                </th>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div class="mb-3">
+          <%= paginate @admins %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

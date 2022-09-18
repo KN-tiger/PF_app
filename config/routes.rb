@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get '/about', to: 'homes#about', as: 'about'
+    get "search" => "searches#search"
     resources :items, only: [:index,:show]
     get '/users/my_page', to: 'users#show', as: 'my_page'
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all', as: 'cart_items_destroy_all'
@@ -30,6 +31,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: "homes#top"
+    get "search" => "searches#search"
     resources :items, except: [:destroy]
     resources :genres, except: [:new,:show,:destroy]
     resources :tags, except: [:new,:show,:destroy]

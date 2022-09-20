@@ -10,6 +10,7 @@ class Admin::ItemsController < ApplicationController
   def new
     @item_new = Item.new
     @genres = Genre.all
+    @tags = Tag.all
   end
 
   def create
@@ -22,6 +23,7 @@ class Admin::ItemsController < ApplicationController
     else
       flash[:alert] = "商品の登録に失敗しました"
       @genres = Genre.all
+      @tags = Tag.all
       render :new
     end
   end
@@ -32,8 +34,9 @@ class Admin::ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    @tag_list =@item.tags.pluck(:name).join(",")
+    @tag_list =@item.tags.pluck(:tag_name).join(",")
     @genres = Genre.all
+    @tags = Tag.all
   end
 
   def update
@@ -55,9 +58,9 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:genre_id, :name, :introduction, :price_without_tax, :is_stopped, :image)
+    params.require(:item).permit(:genre_id, :name, :introduction, :price_without_tax, :is_stopped, :image, tag_ids: [])
   end
-  
+
   def ensure_guest_user
     @admin = current_admin
     if @admin.login_id == "guest@example"

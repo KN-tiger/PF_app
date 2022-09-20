@@ -8,6 +8,7 @@
             <tr>
               <th>注文日</th>
               <th>納品先</th>
+              <th>納期</th>
               <th>注文商品</th>
               <th>支払金額</th>
               <th>ステータス</th>
@@ -21,6 +22,9 @@
               <td><%= order.created_at.strftime('%Y/%m/%d %H:%M') %></td>
               <td>
                 <%= order.delivery %>
+              </td>
+              <td>
+                <%= order.deadline.strftime('%Y/%m/%d') %>
               </td>
               <td>
                 <% order.items.each do |item| %>

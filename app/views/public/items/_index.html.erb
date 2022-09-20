@@ -11,6 +11,9 @@
               <% unless item.is_stopped == false %>
                 <p class="card-text font-weight-bold text-danger">Sold Out</p>
               <% end %>
+              <% if item.created_at > 7.days.ago %>
+                <p class="new-mark">NEW</p>
+              <% end %>
             </div>
           <% end %>
         </div>

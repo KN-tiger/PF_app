@@ -1,17 +1,17 @@
 <% if user_signed_in? %>
-  <div class="search_form text-right">
+  <div class="search_form text-right mr-5">
     <%= form_with url: search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :word, value: @word, class: "m-2" %>
+      <%= f.text_field :word, value: @word, class: "mr-3" %>
       <%= f.select :range, options_for_select(["事務員", "注文", "商品"],"商品") %>
-      <%= f.submit "検索", class: "btn btn-primary m-3" %>
+      <%= f.submit "検索", class: "btn btn-primary ml-2" %>
     <% end %>
   </div>
 <% elsif admin_signed_in? %>
-  <div class="search_form text-right">
+  <div class="search_form text-right mr-5">
     <%= form_with url: admin_search_path, local: true, method: :get do |f| %>
-      <%= f.text_field :word, value: @word, class: "m-2" %>
+      <%= f.text_field :word, value: @word, class: "mr-3" %>
       <%= f.select :range, options_for_select(["事務員", "営業", "注文", "商品"],"商品") %>
-      <%= f.submit "検索", class: "btn btn-primary" %>
+      <%= f.submit "検索", class: "btn btn-primary ml-2" %>
     <% end %>
   </div>
 <% else %>

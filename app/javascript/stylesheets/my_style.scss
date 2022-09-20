@@ -148,3 +148,53 @@ textarea {
 .order_item_status_unable {
   background: #ffb6c1;
 }
+
+.old-system {
+  height: 40%;
+  width: 50%;
+  background: #ffe4e1;
+}
+
+.new-system {
+  height: 40%;
+  width: 50%;
+  background: #f0ffff;
+}
+
+.about-text>ul>li {
+  margin: 20px;
+}
+
+.arrow {
+  text-align : center;
+}
+
+.new-mark {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1.5;
+  display: inline-block;
+  color: #fff;
+  background: #F00;
+  border-radius: 15px;
+  padding: 0 5px;
+}
+
+#error_explanation {
+  width: 100%;
+  border: 2px solid #dc3545;
+  border-radius: 30px;
+  overflow: hidden;
+  padding: 7px 7px 0;
+  margin-bottom: 20px;
+
+  h3 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    margin: -7px -7px 0;
+    background-color: #dc3545;
+    color: #ffffff;
+  }
+
+}

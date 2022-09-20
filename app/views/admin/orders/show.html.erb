@@ -21,6 +21,12 @@
               </td>
             </tr>
             <tr>
+              <td class="bg-light">納期</td>
+              <td>
+                <%= @order.deadline.strftime('%Y/%m/%d')%>
+              </td>
+            </tr>
+            <tr>
               <td class="bg-light">注文ステータス</td>
               <td>
                 <%= form_with model: @order, url: admin_order_path(@order.id), local: true, method: :patch do |f| %>

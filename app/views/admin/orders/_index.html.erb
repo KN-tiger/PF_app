@@ -20,7 +20,7 @@
                 納品先
               </th>
               <th>
-                注文個数
+                納期
               </th>
               <th>
                 注文ステータス
@@ -42,7 +42,7 @@
                 <%= order.delivery %>
               </th>
               <th>
-                <%= order.order_items.sum(:amount) %>
+                <%= order.deadline.strftime('%Y/%m/%d') %>
               </th>
               <th>
                 <%= order.order_status_i18n %>

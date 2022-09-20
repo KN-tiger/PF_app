@@ -25,14 +25,6 @@
               <td><%= @item.genre.name %></td>
             </tr>
             <tr>
-              <th>検索用タグ</th>
-                <div class="d-flex flex-wrap">
-                  <% @item.tags.each do |tag| %>
-                    <td><%= tag.name %></td>
-                  <% end %>
-                </div>  
-            </tr>
-            <tr>
               <th>税込価格<br>(税抜価格)</th>
               <td>
                 <%= @item.price_with_tax.to_s(:delimited) %>
@@ -48,8 +40,15 @@
               <% end %>
             </tr>
           </table>
-
-          <div class="text-center">
+          <div class="d-flex flex-wrap">
+            <div class="m-3">検索用タグ</div>
+            <% @item.tags.each do |tag| %>
+              <div class="m-3">
+                <i class="fa-solid fa-tag pt-1"></i><%= tag.tag_name %>
+              </div>
+            <% end %>
+          </div>
+          <div class="text-center mt-3">
             <%= link_to "編集する", edit_admin_item_path(@item), class: "btn btn-success w-50" %>
           </div>
         </div>

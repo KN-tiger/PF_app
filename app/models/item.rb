@@ -15,6 +15,7 @@ class Item < ApplicationRecord
   validate :image_type
 
 
+
   def price_with_tax
     tax = 1 + 0.10
     ( self.price_without_tax * tax).floor
@@ -29,17 +30,17 @@ class Item < ApplicationRecord
   end
 
   def save_tags(save_item_tags)
-    current_tags = self.tags.pluck(:tagname) unless self.tags.nil?
+    current_tags = self.tags.pluck(:tag_name) unless self.tags.nil?
     old_tags = current_tags - save_item_tags
     new_tags = save_item_tags - current_tags
 
     old_tags.each do |old_name|
-      self.tags.delete Tag.find_by(name: old_name)
+      self.tags.delete Tag.find_by(tag_name: old_name)
     end
 
     new_tags.each do |new_name|
-      micropost_tag = Tag.find_or_create_by(name: new_name)
-      self.tags << micropost_tag
+      item_tag = Tag.find_or_create_by(tag_name: new_name)
+      self.tags << item_tag
     end
   end
 
@@ -61,4 +62,5 @@ private
       errors.add(:image, 'はJPEGまたはPNG形式を選択してアップロードしてください')
     end
   end
+
 end

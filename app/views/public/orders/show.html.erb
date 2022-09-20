@@ -17,6 +17,12 @@
               </td>
             </tr>
             <tr>
+              <td class="bg-light">納期</td>
+              <td>
+                <%= @order.deadline.strftime('%Y/%m/%d')%>
+              </td>
+            </tr>
+            <tr>
               <td class="bg-light">ステータス</td>
               <td><%= @order.order_status_i18n %></td>
             </tr>

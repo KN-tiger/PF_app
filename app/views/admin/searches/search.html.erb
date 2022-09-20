@@ -2,20 +2,20 @@
     <% if @admins == [] %>
       <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
     <% else %>
-  　  <%= render 'admin/admins/index' %>
-  　<% end %>
-　<% elsif @range == "注文" %>
-　  <% if @orders == [] %>
+     <%= render 'admin/admins/index' %>
+    <% end %>
+  <% elsif @range == "注文" %>
+    <% if @orders == [] %>
       <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
     <% else %>
-  　  <%= render 'admin/orders/index' %>
-  　<% end %>
+     <%= render 'admin/orders/index' %>
+    <% end %>
   <% elsif @range == "営業" %>
-　  <% if @users == [] %>
+    <% if @users == [] %>
       <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
     <% else %>
-  　  <%= render 'admin/users/index' %>
-  　<% end %>
+     <%= render 'admin/users/index' %>
+    <% end %>
   <% elsif @range == "商品" %>
     <% if @items == [] %>
       <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
@@ -35,5 +35,5 @@
           </div>
         </div>
       </div>
-  　<% end %>
+    <% end %>
   <% end %>

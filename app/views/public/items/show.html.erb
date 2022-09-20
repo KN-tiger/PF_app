@@ -23,6 +23,10 @@
                 </div>
               <% end %>
             </div>
+            <details>
+            　<summary>詳細</summary>
+            　　<%= @item.detail %>
+            </details>
               <% if @item.is_stopped == false %>
                 <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>
                   <%= f.hidden_field :item_id, :value => @item.id %>

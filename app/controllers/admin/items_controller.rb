@@ -58,7 +58,7 @@ class Admin::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:genre_id, :name, :introduction, :price_without_tax, :is_stopped, :image, tag_ids: [])
+    params.require(:item).permit(:genre_id, :name, :introduction, :price_without_tax, :is_stopped, :detail, :image, tag_ids: [])
   end
 
   def ensure_guest_user

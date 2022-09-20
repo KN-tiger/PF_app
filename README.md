@@ -23,7 +23,7 @@
 
 
 ## 設計書
-![発注くんER図](https://user-images.githubusercontent.com/108563821/188629649-c2ce6140-cb07-4b18-9328-b62b58690623.png)
+![発注くんER図](https://user-images.githubusercontent.com/108563821/191239914-f5ee371b-fb0d-434d-8106-5a2abbb904e3.jpg)
 
 **gem**
 * enum_help

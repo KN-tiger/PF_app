@@ -10,10 +10,10 @@ class Item < ApplicationRecord
 
   validates :name, presence: true
   validates :introduction, presence: true
+  validates :detail, presence: true
   validates :price_without_tax, presence: true
   validates :is_stopped, inclusion: {in: [true, false]}
   validate :image_type
-
 
 
   def price_with_tax

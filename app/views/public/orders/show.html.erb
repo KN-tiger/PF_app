@@ -73,8 +73,9 @@
         <div class="col-md-10">
           <h5 class="font-weight-bold">備考</h5>
           <div class="p-3"><%= @order.note %></div>
-          <div class="text-center">
-            <%= link_to "納品を完了する", order_path, method: :patch, class: "btn btn-success w-50 mt-3" %>
+          <div class="d-flex flex-wrap mt-5 mb-5 justify-content-center">
+            <%= link_to "注文履歴一覧に戻る", orders_path, class: "btn btn-primary mr-5" %>
+            <%= link_to "納品を完了する", order_path, method: :patch, class: "btn btn-success" %>
           </div>
         </div>
       </div>

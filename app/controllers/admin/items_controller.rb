@@ -50,6 +50,7 @@ class Admin::ItemsController < ApplicationController
       # DBエラ－対策
       @item_old_image = Item.find(params[:id])
       @genres = Genre.all
+      @tags = Tag.all
       flash[:alert] = "商品情報の変更に失敗しました"
       render :edit
     end

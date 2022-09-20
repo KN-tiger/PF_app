@@ -64,7 +64,7 @@
                 <th>単価 (税込)</th>
                 <th>個数</th>
                 <th>小計</th>
-                <th></th>
+                <th>発注ステータス</th>
               </tr>
             </thead>
 
@@ -93,6 +93,9 @@
         <div class="col-md-10">
           <h5 class="font-weight-bold">備考</h5>
           <div class="p-5"><%= @order.note %></div>
+          <div class="text-center mt-5 mb-5">
+            <%= link_to "注文履歴一覧に戻る", admin_orders_path, class: "btn btn-primary mr-5" %>
+          </div>  
         </div>
       </div>
     </div>

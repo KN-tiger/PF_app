@@ -35,6 +35,7 @@ ja:
         price_without_tax: 税抜価格
         image: 画像
         tag_ids: タグ名
+        detail: 商品詳細
       genre:
         name: ジャンル名
     errors:

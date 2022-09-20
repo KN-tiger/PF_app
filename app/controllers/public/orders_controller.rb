@@ -43,16 +43,16 @@ class Public::OrdersController < ApplicationController
   def show
     @order = Order.find(params[:id])
     @order_items = @order.order_items
-   
+
   end
 
   def update
     @order = Order.find(params[:id])
     # 注文ステータスが納品完了になったらすべての発注ステータス：納品完了に変更
-    if @order.order_status == 2
-      @order.update(order_status: 3)
+    if @order.order_status == "arrived"
+      @order.update(order_status: "complete")
       @order.order_items.each do |order_item|
-        order_item.update(provision_status: 3)
+        order_item.update(provision_status: "complete")
       end
       flash[:notice] = "注文ステータスを更新しました。"
     else

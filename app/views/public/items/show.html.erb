@@ -23,9 +23,9 @@
                 </div>
               <% end %>
             </div>
-            <details>
-            　<summary>詳細</summary>
-            　　<%= @item.detail %>
+            <details class="mt-3 mb-5">
+            　<summary>商品詳細(クリックして展開)</summary>
+              <%= @item.detail %>
             </details>
               <% if @item.is_stopped == false %>
                 <%= form_with model: @cart_item, url: cart_items_path, method: :post do |f| %>

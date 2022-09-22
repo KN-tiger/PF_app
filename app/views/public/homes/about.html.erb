@@ -2,29 +2,29 @@
   <div class="text-center">
     <h2 class="font-weight-bold">受発注業務をもっと簡単に</h2>
     <p>そんな想いからこのアプリは誕生しました。</p>
-  </div>  
+  </div>
   <div class="row pb-3">
     <div class="col-md-10 mx-auto">
       <div class="row-md-10">
         <h5 class="font-weight-bold">電話での受発注業務</h5>
         <div class="d-flex flex-wrap">
-          <%= image_tag 'talk_businessman', :size => '400x300'%>
+          <%= image_tag asset_path("talk_businessman.png"), :size => '400x300'%>
           <div class="about-text old-system">
             <ul>
               <li>手作業での入力ミスや伝達ミス等の人為的なミスが発生しやすい</li>
               <li>注文の進捗状況は問い合わせしないとわからない</li>
               <li>商品の在庫状況は問い合わせしないとわからない</li>
             </ul>
-          </div>  
+          </div>
         </div>
       </div>
       <div class="arrow">
-        <%= image_tag 'yazirusi', :size => '100x100'%>
+        <%= image_tag asset_path("yazirusi.png"), :size => '100x100'%>
       </div>
       <div class="row-md-10">
         <h5 class="font-weight-bold">『発注くん』を使った受発注業務</h5>
         <div class="d-flex flex-wrap">
-          <%= image_tag 'smartphone_businessman', :size => '400x300' %>
+          <%= image_tag asset_path("smartphone_businessman.png"), :size => '400x300' %>
           <div class="about-text new-system">
             <ul>
               <li>直感的でわかりやすい操作方法によるアプリ注文で人為的なミスを防止</li>
@@ -32,9 +32,9 @@
               <li>商品の在庫状況がリアルタイムで共有</li>
               <li>豊富な検索方法により、商品提案をサポート</li>
             </ul>
-          </div>  
+          </div>
         </div>
-      </div>  
+      </div>
 
       <div class="text-center mt-5">
         <%= link_to 'ご利用はこちらから', new_user_session_path, class: "btn btn-primary w-50 mt-3", method: :get %>

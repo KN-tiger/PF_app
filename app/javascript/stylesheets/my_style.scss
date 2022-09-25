@@ -2,6 +2,17 @@ footer {
   background-color: #5295cc;
 }
 
+table {
+  width:  100%;  
+  table-layout: fixed;
+}
+
+th {
+  text-align: center;
+}
+
+
+
 button{
   background-color: transparent;
   border: none;

@@ -7,7 +7,7 @@
       </div>
 
       <div class="row-md-10 pb-3">
-        <table class="table">
+        <table class="table table-sm">
           <thead style="background-color:#f5fffa">
             <tr>
               <th>
@@ -22,7 +22,7 @@
               <th>
                 納期
               </th>
-              <th>
+              <th colspan="2">
                 注文ステータス
               </th>
             </tr>
@@ -30,23 +30,24 @@
           <tbody>
             <% @orders.each do |order| %>
             <tr class=<%= "order_status_#{order.order_status}" %>>
-              <th>
-                <%= link_to admin_order_path(order.id) do %>
-                  <%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
-                <% end %>
-              </th>
-              <th>
+              <td>
+                <%= order.created_at.strftime('%Y/%m/%d %H:%M:%S') %>
+              </td>
+              <td>
                 <%= order.user.full_name %>
-              </th>
-              <th>
+              </td>
+              <td>
                 <%= order.delivery %>
-              </th>
-              <th>
+              </td>
+              <td>
                 <%= order.deadline.strftime('%Y/%m/%d') %>
-              </th>
-              <th>
+              </td>
+              <td>
                 <%= order.order_status_i18n %>
-              </th>
+              </td>
+              <td>
+                <%= link_to "表示する", admin_order_path(order), class: "btn btn-sm btn-primary" %>
+              </td>
             </tr>
             <% end %>
           </tbody>

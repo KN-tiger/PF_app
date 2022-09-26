@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "search" => "searches#search"
     resources :items, except: [:destroy]
-    resources :genres, except: [:new,:show,:destroy]
+    resources :genres, except: [:new,:destroy]
     resources :tags, except: [:new,:show,:destroy]
     get 'users/:id/order_history', to: 'users#order_history', as: 'users_order_history'
     patch 'users/:id/deactivate', to: 'users#deactivate', as: 'users_deactivate'

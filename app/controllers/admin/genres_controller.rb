@@ -5,6 +5,12 @@ class Admin::GenresController < ApplicationController
     @genres = Genre.all
     @genre_new = Genre.new
   end
+  
+  def show
+    @genres = Genre.all
+    @genre = Genre.find(params[:id])
+    @items = Item.where(genre_id: @genre.id).page(params[:page]).per(9)
+  end
 
   def create
     @genre_new = Genre.new(genre_params)

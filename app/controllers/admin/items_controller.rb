@@ -5,6 +5,7 @@ class Admin::ItemsController < ApplicationController
   def index
     @items = Item.page(params[:page]).per(8)
     @total_items = Item.all
+    @genres = Genre.all
   end
 
   def new

@@ -22,7 +22,7 @@ class Admin::OrdersController < ApplicationController
     flash[:notice] = "注文ステータスを更新しました。"
     redirect_to admin_order_path(@order.id)
   end
-  
+
 
   private
 
@@ -33,7 +33,7 @@ class Admin::OrdersController < ApplicationController
   def ensure_order
     @order = Order.find(params[:id])
   end
-  
+
   def ensure_guest_user
     @admin = current_admin
     if @admin.login_id == "guest@example"
@@ -41,5 +41,5 @@ class Admin::OrdersController < ApplicationController
       redirect_to admin_root_path
     end
   end
-  
+
 end

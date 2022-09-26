@@ -44,9 +44,11 @@
           
           <div class="d-flex flex-wrap">
             <div class="w-25 mb-3">既存のタグ一覧</div>
-            <% @tags.each do |tag| %>
-              <i class="fa-solid fa-tag p-1 mb-3"></i><%= tag.tag_name %>
-            <% end %>
+            <div class="w-50 mb-3">
+              <% @tags.each do |tag| %>
+                <i class="fa-solid fa-tag p-1 mb-3"></i><%= tag.tag_name %>
+              <% end %>
+            </div>  
           </div>
           
           <div class="field d-flex mb-3">

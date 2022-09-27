@@ -9,7 +9,7 @@
         <h2><%= @genre.name %>一覧（全<%= @items.count %>件）</h2>
       </div>
 
-      <%= render 'public/items/index', items: @items %>
+      <%= render 'admin/items/index', items: @items %>
 
       <div class="row-md-9 pb-3">
         <%= paginate @items %>

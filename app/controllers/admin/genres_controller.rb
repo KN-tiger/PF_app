@@ -1,11 +1,11 @@
 class Admin::GenresController < ApplicationController
   before_action :authenticate_admin!
-  before_action :ensure_guest_user, except: [:index, :edit]
+  before_action :ensure_guest_user, except: [:show, :index, :edit]
   def index
     @genres = Genre.all
     @genre_new = Genre.new
   end
-  
+
   def show
     @genres = Genre.all
     @genre = Genre.find(params[:id])
@@ -50,5 +50,5 @@ class Admin::GenresController < ApplicationController
       redirect_to admin_root_path
     end
   end
-  
+
 end

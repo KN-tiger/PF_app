@@ -31,7 +31,7 @@
             <%= f.label :introduction, "商品説明", class: "w-25" %><br>
             <%= f.text_area :introduction, class: "form-control w-50" %>
           </div>
-          
+
           <div class="field d-flex mb-3">
             <%= f.label :detail, "詳細", class: "w-25" %><br>
             <%= f.text_area :detail, class: "form-control w-50" %>
@@ -41,17 +41,19 @@
             <%= f.label :genre_id, "ジャンル", class: "w-25" %><br>
             <%= f.collection_select :genre_id, @genres, :id, :name, include_blank: "選択して下さい", class: "form-select w-50" %>
           </div>
-          
+
           <div class="field d-flex mb-3">
             <%= f.label :tag_ids, "検索用タグ", class: "w-25" %><br>
             <%= f.text_field :tag_ids, value: @tag_list, placeholder: "タグを複数つけるには','で区切ってください。", :required => true, class: "form-control w-50" %>
           </div>
-          
+
           <div class="d-flex flex-wrap">
             <div class="w-25 mb-3">既存のタグ一覧</div>
-            <% @tags.each do |tag| %>
-              <i class="fa-solid fa-tag p-1 mb-3"></i><%= tag.tag_name %>
-            <% end %>
+            <div class="w-50 mb-3">
+              <% @tags.each do |tag| %>
+                <i class="fa-solid fa-tag p-1 mb-3"></i><%= tag.tag_name %>
+              <% end %>
+            </div>
           </div>
 
           <div class="field d-flex mb-3">

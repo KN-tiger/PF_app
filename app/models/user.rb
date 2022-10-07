@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :cart_items, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :login_id, uniqueness: true, presence: true
   validates :last_name, presence: true

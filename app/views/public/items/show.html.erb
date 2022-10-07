@@ -13,6 +13,9 @@
           </div>
           <div class="col-md-7">
             <h3><%= @item.name %></h3>
+            <div id="favorite_button_<%= @item.id %>">
+              <%= render "public/favorites/btn", item: @item %>
+            </div>
             <p><%= @item.introduction %></p>
             <p>￥<%= @item.price_with_tax.to_s(:delimited) %>(税込)</p>
             <div class="d-flex flex-wrap">

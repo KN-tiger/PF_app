@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get '/about', to: 'homes#about', as: 'about'
     get "search" => "searches#search"
-    resources :items, only: [:index,:show]
+    resources :items, only: [:index,:show] do
+      resource :favorites, only: [:create, :destroy, :index]
+    end 
     get '/users/my_page', to: 'users#show', as: 'my_page'
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all', as: 'cart_items_destroy_all'
     resources :cart_items, except: [:show,:new,:edit]

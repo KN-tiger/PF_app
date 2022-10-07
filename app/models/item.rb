@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :item_tags, dependent: :destroy
   has_many :tags, through: :item_tags, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   has_one_attached :image
 
@@ -51,6 +52,10 @@ class Item < ApplicationRecord
     else
       Item.order('created_at DESC')
     end
+  end
+  
+  def favorited_by?(user)
+    favorites.where(user_id: user).exists?
   end
 
 private

@@ -1,0 +1,40 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'layouts/sidebar',genres: @genres %>
+    </div>
+    <div class="col-md-9">
+      <% if @favorites.empty? %>
+        <h2>お気に入り商品はありません</h2>
+      <% else %>
+        <h2>商品一覧（全<%= @total_favorites.count %>件）</h2>
+        <div class="row-md-9 pb-3">
+          <div class="d-flex flex-wrap">
+            <% @favorites.each do |favorite| %>
+              <div class="card-group">
+                <div class="card shadow-sm">
+                  <%= link_to item_path(favorite.item_id) do %>
+                    <%= image_tag favorite.item.image, class: "bd-placeholder-img card-img-top" %>
+                    <div class="card-body">
+                      <h5 class="card-title"><%= favorite.item.name %></h5>
+                      <p class="card-text">￥<%= favorite.item.price_with_tax.to_s(:delimited) %></p>
+                      <% unless favorite.item.is_stopped == false %>
+                        <p class="card-text font-weight-bold text-danger">Sold Out</p>
+                      <% end %>
+                      <% if favorite.item.created_at > 7.days.ago %>
+                        <p class="new-mark">NEW</p>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="row-md-9 pb-3">
+  <%= paginate @favorites %>
+  </div>
+</div>

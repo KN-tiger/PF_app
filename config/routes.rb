@@ -5,8 +5,9 @@ Rails.application.routes.draw do
     get '/about', to: 'homes#about', as: 'about'
     get "search" => "searches#search"
     resources :items, only: [:index,:show] do
-      resource :favorites, only: [:create, :destroy, :index]
-    end 
+      resource :favorites, only: [:create,:destroy]
+    end
+    resources :favorites, only: [:index]
     get '/users/my_page', to: 'users#show', as: 'my_page'
     delete 'cart_items/destroy_all', to: 'cart_items#destroy_all', as: 'cart_items_destroy_all'
     resources :cart_items, except: [:show,:new,:edit]
@@ -16,8 +17,6 @@ Rails.application.routes.draw do
     resources :genres, only: [:show]
     resources :tags, only: [:show]
     resources :admins, only: [:index,:show]
-    resources :user_messages, only: [:create]
-    resources :rooms, only: [:index,:create,:show]
   end
 
   devise_scope :user do
@@ -44,8 +43,6 @@ Rails.application.routes.draw do
     resources :admins, except: [:new,:create,:destroy]
     resources :orders, only: [:index,:show,:update]
     resources :order_items, only: [:update]
-    resources :admin_messages, only: [:create]
-    resources :rooms, only: [:index,:create,:show]
   end
 
   devise_scope :admin do

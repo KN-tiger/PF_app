@@ -2,6 +2,11 @@
   <h3 class="border-bottom">ジャンル検索</h3>
   <% if user_signed_in? %>
     <div class="list-group list-group-flush border-bottom scrollarea">
+      <div class="list-group-item list-group-item-action py-3 lh-sm">
+        <span>
+          <%= link_to "お気に入り商品", favorites_path, class: 'd-flex w-100 align-items-center justify-content-between' %>
+        </span>
+      </div>
       <% genres.each do |genre| %>
         <% if genre.items.count != 0 %>
           <div class="list-group-item list-group-item-action py-3 lh-sm">

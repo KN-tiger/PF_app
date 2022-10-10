@@ -23,7 +23,7 @@
 
 
 ## 設計書
-![発注くんER図](https://user-images.githubusercontent.com/108563821/191239914-f5ee371b-fb0d-434d-8106-5a2abbb904e3.jpg)
+![発注くんER図](https://user-images.githubusercontent.com/108563821/194839249-b5448838-550f-4942-8ff1-75d0507e376c.jpg)
 
 **gem**
 * enum_help
@@ -36,7 +36,7 @@
 * Active Storage
 
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Amazon Linux 2
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery

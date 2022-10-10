@@ -3,7 +3,7 @@ class Public::FavoritesController < ApplicationController
 
   def index
     @favorites = current_user.favorites.page(params[:page]).per(9)
-    @total_favorites = @favorites.all
+    @total_favorites = current_user.favorites
     @genres = Genre.all
   end
 

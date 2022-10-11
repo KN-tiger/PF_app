@@ -14,14 +14,18 @@
     <% if @items == [] %>
       <h2 class = "text-center mt-5 mx-auto">検索結果はありません</h2>
     <% else %>
-  　 <div class="container py-5">
+  　   <div class="container py-5">
         <div class="row">
-          <div class="col-md-10 mx-auto">
-            <div class="row-md-10 pb-3">
-              <h2 class="mr-auto">商品一覧（全<%= @items.count %>件）</h2>
-            </div>
-            <%= render 'public/items/index' %>
+          <div class="col-md-3">
+            <%= render 'layouts/sidebar',genres: @genres %>
           </div>
+          <div class="col-md-9">
+            <h2>商品一覧（全<%= @items.count %>件）</h2>
+            <%= render 'public/items/index', items: @items %>
+          </div>
+        </div>
+        <div class="row-md-9 pb-3">
+          <%= paginate @items %>
         </div>
       </div>
   　<% end %>

@@ -10,7 +10,6 @@ class Public::SearchesController < ApplicationController
       @admins = Admin.where.not(login_id: 'guest@example').where(is_deleted: 'false').search(params[:word]).page(params[:page]).per(10)
     elsif @range == "商品"
       @items = Item.search(params[:word]).page(params[:page]).per(9)
-      @total_items = Item.all
       @genres = Genre.all
     end
   end

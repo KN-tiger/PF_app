@@ -12,6 +12,7 @@ class Admin::SearchesController < ApplicationController
       @users = User.where.not(login_id: 'guest@example').search(params[:word]).page(params[:page]).per(10)
     elsif  @range == "商品"
       @items = Item.search(params[:word]).page(params[:page]).per(10)
+      @genres = Genre.all
     end
   end
 

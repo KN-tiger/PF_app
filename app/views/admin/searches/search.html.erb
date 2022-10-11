@@ -27,15 +27,10 @@
           </div>
           <div class="col-md-9 mx-auto">
             <div class="row-md-9 pb-3">
-              <div class="d-flex">
-                <h2 class="mr-auto">商品一覧（全<%= @items.count %>件）</h2>
-              </div>
+              <h2 class="mr-auto">商品一覧（全<%= @items.count %>件）</h2>
             </div>
             <%= render 'admin/items/index' %>
           </div>
-        </div>
-        <div class="row-md-9 pb-3">
-          <%= paginate @items %>
         </div>
       </div>
     <% end %>
